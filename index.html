@@ -15,12 +15,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
     <link rel="canonical" href="https://wamsley-group.github.io">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div class="alert alert-warning alert-dismissible fade show" role="alert" style="border-radius: 0; margin-bottom: 0;">
-        <strong>Under Construction:</strong> This website is currently under development. Some features may be unavailable.
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Main navigation">
         <div class="container-fluid">
@@ -31,8 +28,9 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://glasshouserealty.com/featured-listing">Buy</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://glasshouserealty.com/sell-my-house">Sell</a></li>
                     <li class="nav-item"><a class="nav-link" href="about-us.html">About Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                 </ul>
             </div>
@@ -42,37 +40,20 @@
     <!-- Main Content -->
     <main>
         <!-- Hero Section -->
-        <section id="home" class="hero bg-light py-5">
-            <div class="container">
+        <section id="home" class="hero py-5" style="min-height: 500px; position: relative; display: flex; align-items: center;">
+            <video autoplay muted loop style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;">
+                <source src="./assets/city.mp4" type="video/mp4">
+            </video>
+            <div class="container" style="position: relative; z-index: 1;">
+                <!-- your content here -->
                 <div class="row align-items-center">
                     <div class="col-lg-6">
-                        <h1 class="display-4">Welcome to Wamsley Group</h1>
-                        <p class="lead">Your trusted partner for excellence and innovation.</p>
-                        <button class="btn btn-primary btn-lg" aria-label="Get started">Get Started</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="py-5">
-            <div class="container">
-                <h2>About Us</h2>
-                <p>Learn more about our mission and values.</p>
-            </div>
-        </section>
-
-        <!-- Services Section -->
-        <section id="services" class="bg-light py-5">
-            <div class="container">
-                <h2>Our Services</h2>
-                <div class="row">
-                    <div class="col-md-4 mb-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Service 1</h5>
-                                <p class="card-text">Description of service.</p>
-                            </div>
+                        <div class="welcome p-5 rounded" style="box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                            <h1 class="display-4">Find Your Dream Home in Dayton</h1>
+                            <p class="lead">Expert real estate guidance for the Dayton, Ohio area. Whether you're looking to buy your first home, sell your current property, or explore investment opportunities, the Wamsley Group is here to guide you through every step of the process with personalized service and deep market knowledge.</p>
+                            <p>Our experienced team specializes in helping families and investors navigate the vibrant Dayton real estate market with confidence and success.</p>
+                            <a href="https://glasshouserealty.com/featured-listing" class="btn btn-primary btn-lg me-2" aria-label="Explore homes for sale">Explore Homes</a>
+                            <button class="btn btn-outline-primary btn-lg" aria-label="Schedule a consultation"><a href="#contact" style="text-decoration: none; color: inherit;">Schedule Consultation</a></button>
                         </div>
                     </div>
                 </div>
@@ -80,7 +61,7 @@
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="py-5">
+        <section id="contact" class="py-5 contact-class">
             <div class="container">
                 <h2>Connect with Us</h2>
                 <p>Ready to make your real estate dreams a reality? Reach out to us today!</p>
@@ -126,6 +107,14 @@
     <!-- Footer -->
     <footer class="bg-dark text-white py-4 mt-5">
         <div class="container text-center">
+            <div class="mb-3 ">
+                <a href="https://www.linkedin.com/in/jared-wamsley-8aa379155/" class="btn btn-circle btn-linkedin btn-lg mx-2" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin-in fa-lg"></i>
+                </a>
+                <a href="https://www.instagram.com/wamsleygroup/" class="btn btn-circle btn-instagram btn-lg mx-2" aria-label="Instagram">
+                    <i class="fab fa-instagram fa-lg"></i>
+                </a>
+            </div>
             <p>&copy; 2026 Wamsley Group. All rights reserved.</p>
         </div>
     </footer>

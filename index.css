@@ -3,8 +3,47 @@ body {
     flex-direction: column;
     min-height: 100vh;
     margin: 0;
+    background-color: #212529;
 }
 
 main {
     flex: 1;
+}
+
+.welcome {
+    background-color: #212529;
+    color: white;
+    border-radius: 100px;
+}
+
+.contact-class {
+    background-color: #212529;
+    color: white;
+}
+
+.about-us {
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.btn-circle {
+    background-color: white;
+}
+
+.fa-linkedin-in {
+    color: #0A66C2 !important;
+}
+
+.fa-instagram {
+    color: #E1306C !important;
+}
+
+.navbar-brand {
+    padding-left: 100px;
+}
+
+.navbar-nav {
+    padding-right: 100px;
 }
