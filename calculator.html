@@ -256,9 +256,10 @@
 
             // Calculate loan amount from monthly payment
             // P = (M / r) * (1 - (1 + r)^-n)
-            // Subtract estimated taxes and insurance from payment before calculating loan amount
-            const estimatedTaxAndInsurance = monthlyInsurance;
-            const paymentForLoan = Math.max(0, maxAffordablePayment - estimatedTaxAndInsurance);
+            // Subtract estimated insurance from payment before calculating loan amount
+            // (property tax will be calculated iteratively based on home price)
+            const estimatedInsurance = monthlyInsurance;
+            const paymentForLoan = Math.max(0, maxAffordablePayment - estimatedInsurance);
             let loanAmount = 0;
             if (monthlyInterestRate > 0) {
                 loanAmount = (paymentForLoan / monthlyInterestRate) * (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments));
