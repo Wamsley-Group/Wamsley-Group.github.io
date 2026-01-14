@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Wamsley Group - Your trusted real estate partner in Dayton, Ohio. Expert home buying, selling, and market insights for the Dayton region.">
+    <meta name="keywords" content="real estate Dayton Ohio, homes for sale Dayton, buy sell homes Dayton, real estate agent Dayton">
+    <meta name="author" content="Wamsley Group">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Wamsley Group - Real Estate in Dayton, Ohio">
+    <meta property="og:description" content="Expert real estate services in Dayton, Ohio. Buy, sell, and discover your dream home today.">
+    <meta property="og:type" content="business.business">
+    <meta property="og:url" content="https://wamsleygroup.com">
+    <title>Real Estate Dayton Ohio | Home Buying & Selling | Wamsley Group</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <link rel="canonical" href="https://wamsleygroup.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Main navigation">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="index.html" aria-label="Wamsley Group home">
+                <img src="./assets/glasshouse-logo.png" alt="Wamsley Group logo" height="40" class="d-inline-block align-text-top me-2 toplogo" loading="lazy">
+                <span>Wamsley Group</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://glasshouserealty.com/featured-listing">Buy</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://glasshouserealty.com/sell-my-house">Sell</a></li>
+                    <li class="nav-item"><a class="nav-link" href="calculator.html">Calculator</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about-us.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Home Affordability Calculator Section -->
+        <section id="calculator" class="py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 mx-auto">
+                        <h1 class="text-center mb-5">Home Affordability Calculator</h1>
+                        
+                        <div class="row">
+                            <!-- Input Controls -->
+                            <div class="col-lg-6">
+                                <div class="card shadow-sm">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-4">Enter Your Information</h5>
+                                        
+                                        <div class="mb-4">
+                                            <label for="annualIncome" class="form-label">Annual Gross Income</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text">$</span>
+                                                <input type="number" class="form-control" id="annualIncome" value="75000" min="0" step="5000">
+                                            </div>
+                                            <small class="form-text text-muted">Your total annual household income</small>
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <label for="downPayment" class="form-label">Down Payment</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text">$</span>
+                                                <input type="number" class="form-control" id="downPayment" value="30000" min="0" step="5000">
+                                            </div>
+                                            <small class="form-text text-muted">Amount you have available for down payment</small>
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <label for="interestRate" class="form-label">Interest Rate (%)</label>
+                                            <input type="number" class="form-control" id="interestRate" value="7.0" min="2" max="12" step="0.1">
+                                            <small class="form-text text-muted">Current mortgage interest rate</small>
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <label for="loanTerm" class="form-label">Loan Term (Years)</label>
+                                            <select class="form-select" id="loanTerm">
+                                                <option value="15">15 Years</option>
+                                                <option value="20">20 Years</option>
+                                                <option value="30" selected>30 Years</option>
+                                            </select>
+                                            <small class="form-text text-muted">Length of mortgage</small>
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <label for="monthlyDebts" class="form-label">Monthly Debt Payments</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text">$</span>
+                                                <input type="number" class="form-control" id="monthlyDebts" value="500" min="0" step="50">
+                                            </div>
+                                            <small class="form-text text-muted">Car loans, student loans, credit cards, etc.</small>
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <label for="propertyTax" class="form-label">Annual Property Tax Rate (%)</label>
+                                            <input type="number" class="form-control" id="propertyTax" value="1.2" min="0" max="5" step="0.1">
+                                            <small class="form-text text-muted">Average in Ohio is ~1.2%</small>
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <label for="insurance" class="form-label">Annual Home Insurance</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text">$</span>
+                                                <input type="number" class="form-control" id="insurance" value="1200" min="0" step="100">
+                                            </div>
+                                            <small class="form-text text-muted">Estimated annual homeowners insurance</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Results Display -->
+                            <div class="col-lg-6">
+                                <div class="card shadow-sm bg-light">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-4">What You Can Afford</h5>
+                                        
+                                        <div class="mb-4 p-3 bg-white rounded border-left-primary">
+                                            <div class="small text-muted">Maximum Home Price</div>
+                                            <div class="h3 text-primary font-weight-bold" id="maxHomePrice">$0</div>
+                                        </div>
+
+                                        <div class="mb-4 p-3 bg-white rounded">
+                                            <div class="small text-muted">Loan Amount (After Down Payment)</div>
+                                            <div class="h4" id="loanAmount">$0</div>
+                                        </div>
+
+                                        <div class="mb-4 p-3 bg-white rounded">
+                                            <div class="small text-muted">Estimated Monthly Payment</div>
+                                            <div class="h4" id="monthlyPayment">$0</div>
+                                        </div>
+
+                                        <div class="mb-4 p-3 bg-white rounded">
+                                            <div class="small text-muted">Debt-to-Income Ratio</div>
+                                            <div class="h4" id="debtToIncome">0%</div>
+                                            <small class="form-text text-muted">Lenders typically require below 43%</small>
+                                        </div>
+
+                                        <div class="p-3 bg-white rounded">
+                                            <div class="small text-muted mb-2">Monthly Breakdown</div>
+                                            <div class="row mb-2">
+                                                <div class="col-6"><small>Principal & Interest:</small></div>
+                                                <div class="col-6 text-end"><small id="principalInterest">$0</small></div>
+                                            </div>
+                                            <div class="row mb-2">
+                                                <div class="col-6"><small>Property Tax:</small></div>
+                                                <div class="col-6 text-end"><small id="taxBreakdown">$0</small></div>
+                                            </div>
+                                            <div class="row mb-2">
+                                                <div class="col-6"><small>Insurance:</small></div>
+                                                <div class="col-6 text-end"><small id="insuranceBreakdown">$0</small></div>
+                                            </div>
+                                            <div class="row border-top pt-2">
+                                                <div class="col-6"><small class="font-weight-bold">Total PITI:</small></div>
+                                                <div class="col-6 text-end"><small class="font-weight-bold" id="totalPITI">$0</small></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="alert alert-info mt-4" role="alert">
+                                            <small><strong>Disclaimer:</strong> This calculator provides estimates only. Consult with a loan officer for exact pre-qualification amounts and terms.</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-5 contact-class">
+            <div class="container">
+                <h2>Connect with Us</h2>
+                <p>Ready to make your real estate dreams a reality? Reach out to us today!</p>
+                <form id="contactForm">
+                    <div class="mb-3">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="firstName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="phone" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="service" class="form-label">Service Inquiry</label>
+                        <select class="form-select" id="service" required>
+                            <option value="" disabled selected>Select a service</option>
+                            <option value="service1">Buying a Home</option>
+                            <option value="service2">Selling my Home</option>
+                            <option value="service3">Obtaining information regarding my home value</option>
+                            <option value="service4">Obtaining communication regarding market updates</option>
+                            <option value="service5">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input type="checkbox" class="form-check-input" id="consent" required>
+                        <label class="form-check-label" for="consent">I consent to communication and understand that my information will not be shared or sold.</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+
+            </div>
+        </section>
+    </main>
+
+    <style>
+        .border-left-primary {
+            border-left: 4px solid #007bff !important;
+        }
+        .font-weight-bold {
+            font-weight: 600;
+        }
+    </style>
+
+    <script>
+        // Real estate calculator logic
+        function calculateAffordability() {
+            // Get input values
+            const annualIncome = parseFloat(document.getElementById('annualIncome').value) || 0;
+            const downPayment = parseFloat(document.getElementById('downPayment').value) || 0;
+            const interestRate = parseFloat(document.getElementById('interestRate').value) || 0;
+            const loanTerm = parseInt(document.getElementById('loanTerm').value) || 30;
+            const monthlyDebts = parseFloat(document.getElementById('monthlyDebts').value) || 0;
+            const propertyTaxRate = parseFloat(document.getElementById('propertyTax').value) || 0;
+            const annualInsurance = parseFloat(document.getElementById('insurance').value) || 0;
+
+            const monthlyIncome = annualIncome / 12;
+            const monthlyTaxRate = propertyTaxRate / 100 / 12;
+            const monthlyInsurance = annualInsurance / 12;
+            const monthlyInterestRate = interestRate / 100 / 12;
+            const numberOfPayments = loanTerm * 12;
+
+            // Calculate max affordable monthly payment using 28/36 rule
+            // 28% of gross monthly income for housing, 36% total debt
+            const maxHousingPayment = monthlyIncome * 0.28;
+            const maxTotalPayment = monthlyIncome * 0.36;
+            const maxAffordablePayment = Math.max(0, Math.min(maxHousingPayment, maxTotalPayment - monthlyDebts));
+
+            // Calculate loan amount from monthly payment
+            // P = (M / r) * (1 - (1 + r)^-n)
+            // Subtract estimated insurance from payment before calculating loan amount
+            // (property tax will be calculated iteratively based on home price)
+            const estimatedInsurance = monthlyInsurance;
+            const paymentForLoan = Math.max(0, maxAffordablePayment - estimatedInsurance);
+            let loanAmount = 0;
+            if (monthlyInterestRate > 0) {
+                loanAmount = (paymentForLoan / monthlyInterestRate) * (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments));
+            } else {
+                loanAmount = paymentForLoan * numberOfPayments;
+            }
+
+            // Adjust for property tax and insurance in payment
+            // M = P*r / (1 - (1 + r)^-n) + tax + insurance
+            // We need to solve iteratively
+            let maxHomePrice = downPayment + loanAmount;
+            
+            for (let i = 0; i < 10; i++) {
+                const homePrice = downPayment + loanAmount;
+                const monthlyTax = homePrice * monthlyTaxRate;
+                const principalAndInterest = loanAmount > 0 
+                    ? (loanAmount * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments))
+                    : 0;
+                const totalPayment = principalAndInterest + monthlyTax + monthlyInsurance;
+                
+                if (totalPayment > maxAffordablePayment) {
+                    loanAmount *= 0.99;
+                } else {
+                    break;
+                }
+            }
+
+            maxHomePrice = downPayment + loanAmount;
+
+            // Calculate monthly payment components
+            const principalAndInterest = loanAmount > 0 
+                ? (loanAmount * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments))
+                : 0;
+            const monthlyPropertyTax = maxHomePrice * monthlyTaxRate;
+            const totalPITI = principalAndInterest + monthlyPropertyTax + monthlyInsurance;
+            
+            // Calculate debt-to-income ratio
+            const totalMonthlyPayment = totalPITI + monthlyDebts;
+            const debtToIncomeRatio = monthlyIncome > 0 ? (totalMonthlyPayment / monthlyIncome) * 100 : 0;
+
+            // Update UI
+            document.getElementById('maxHomePrice').textContent = '$' + formatCurrency(maxHomePrice);
+            document.getElementById('loanAmount').textContent = '$' + formatCurrency(loanAmount);
+            document.getElementById('monthlyPayment').textContent = '$' + formatCurrency(totalPITI);
+            document.getElementById('debtToIncome').textContent = debtToIncomeRatio.toFixed(1) + '%';
+            document.getElementById('principalInterest').textContent = '$' + formatCurrency(principalAndInterest);
+            document.getElementById('taxBreakdown').textContent = '$' + formatCurrency(monthlyPropertyTax);
+            document.getElementById('insuranceBreakdown').textContent = '$' + formatCurrency(monthlyInsurance);
+            document.getElementById('totalPITI').textContent = '$' + formatCurrency(totalPITI);
+        }
+
+        function formatCurrency(value) {
+            return Math.round(value).toLocaleString('en-US');
+        }
+
+        // Add event listeners
+        document.getElementById('annualIncome').addEventListener('input', calculateAffordability);
+        document.getElementById('downPayment').addEventListener('input', calculateAffordability);
+        document.getElementById('interestRate').addEventListener('input', calculateAffordability);
+        document.getElementById('loanTerm').addEventListener('change', calculateAffordability);
+        document.getElementById('monthlyDebts').addEventListener('input', calculateAffordability);
+        document.getElementById('propertyTax').addEventListener('input', calculateAffordability);
+        document.getElementById('insurance').addEventListener('input', calculateAffordability);
+
+        // Calculate on page load
+        calculateAffordability();
+
+        // Handle contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Here you would typically send the form data to a server
+            alert('Thank you for your inquiry! We will contact you soon.');
+            this.reset();
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <!-- Broker affiliation: logo + label -->
+            <div class="mb-3">
+                <a href="https://www.linkedin.com/in/jared-wamsley-8aa379155/" class="btn btn-circle btn-linkedin btn-lg mx-2" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin-in fa-lg"></i>
+                </a>
+                <a href="https://www.instagram.com/wamsleygroup/" class="btn btn-circle btn-instagram btn-lg mx-2" aria-label="Instagram">
+                    <i class="fab fa-instagram fa-lg"></i>
+                </a>
+            </div>
+            <br>
+            <div class="d-flex justify-content-center align-items-center mb-3">
+                <a href="https://glasshouserealty.com" class="d-inline-block me-3" aria-label="GlassHouse Realty - Affiliated Broker">
+                    <img src="./assets/glasshouse-logo.png" alt="GlassHouse Realty logo — affiliated broker" class="img-fluid footerlogo" loading="lazy">
+                </a>
+                <div class="text-start">
+                    <div class="fw-bold">Affiliated Broker</div>
+                    <div class="small">GlassHouse Realty — Licensed Real Estate Brokerage</div>
+                </div>
+            </div>
+
+            <p class="mb-0">&copy; 2026 Wamsley Group. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
