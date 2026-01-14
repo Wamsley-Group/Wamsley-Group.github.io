@@ -182,7 +182,7 @@
             <div class="container">
                 <h2>Connect with Us</h2>
                 <p>Ready to make your real estate dreams a reality? Reach out to us today!</p>
-                <form>
+                <form id="contactForm">
                     <div class="mb-3">
                         <label for="firstName" class="form-label">First Name</label>
                         <input type="text" class="form-control" id="firstName" required>
@@ -252,15 +252,18 @@
             // 28% of gross monthly income for housing, 36% total debt
             const maxHousingPayment = monthlyIncome * 0.28;
             const maxTotalPayment = monthlyIncome * 0.36;
-            const maxAffordablePayment = Math.min(maxHousingPayment, maxTotalPayment - monthlyDebts);
+            const maxAffordablePayment = Math.max(0, Math.min(maxHousingPayment, maxTotalPayment - monthlyDebts));
 
             // Calculate loan amount from monthly payment
             // P = (M / r) * (1 - (1 + r)^-n)
+            // Subtract estimated taxes and insurance from payment before calculating loan amount
+            const estimatedTaxAndInsurance = monthlyInsurance;
+            const paymentForLoan = Math.max(0, maxAffordablePayment - estimatedTaxAndInsurance);
             let loanAmount = 0;
             if (monthlyInterestRate > 0) {
-                loanAmount = (maxAffordablePayment / monthlyInterestRate) * (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments));
+                loanAmount = (paymentForLoan / monthlyInterestRate) * (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments));
             } else {
-                loanAmount = maxAffordablePayment * numberOfPayments;
+                loanAmount = paymentForLoan * numberOfPayments;
             }
 
             // Adjust for property tax and insurance in payment
@@ -294,7 +297,7 @@
             
             // Calculate debt-to-income ratio
             const totalMonthlyPayment = totalPITI + monthlyDebts;
-            const debtToIncomeRatio = (totalMonthlyPayment / monthlyIncome) * 100;
+            const debtToIncomeRatio = monthlyIncome > 0 ? (totalMonthlyPayment / monthlyIncome) * 100 : 0;
 
             // Update UI
             document.getElementById('maxHomePrice').textContent = '$' + formatCurrency(maxHomePrice);
@@ -322,6 +325,14 @@
 
         // Calculate on page load
         calculateAffordability();
+
+        // Handle contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Here you would typically send the form data to a server
+            alert('Thank you for your inquiry! We will contact you soon.');
+            this.reset();
+        });
     </script>
 
     <!-- Footer -->
