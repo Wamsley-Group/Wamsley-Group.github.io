@@ -103,17 +103,29 @@
                     source: 'GlassHouse Link Click'
                 };
 
-                // Store lead data (in real implementation, send to backend)
-                console.log('Lead captured:', leadData);
-                
-                // You can add API call here to send data to backend
-                // fetch('/api/leads', { method: 'POST', body: JSON.stringify(leadData) });
+                // Create formatted email
+                const emailSubject = 'New Lead Capture - GlassHouse Link Click';
+                const emailBody = `New Lead Capture Submission
 
-                setLeadCaptured();
-                modal.hide();
-                
-                // Redirect to target URL
-                window.location.href = targetUrl;
+Name: ${leadData.name}
+Email: ${leadData.email}
+Phone: ${leadData.phone}
+Source: ${leadData.source}
+Timestamp: ${leadData.timestamp}
+Target URL: ${targetUrl}
+
+This lead was captured when the user attempted to view GlassHouse listings.`;
+
+                // Send email using mailto
+                const mailtoLink = `mailto:?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+                window.location.href = mailtoLink;
+
+                // Small delay before proceeding to target URL
+                setTimeout(() => {
+                    setLeadCaptured();
+                    modal.hide();
+                    window.location.href = targetUrl;
+                }, 1000);
             } else {
                 form.reportValidity();
             }

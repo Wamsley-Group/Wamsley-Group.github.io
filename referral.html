@@ -262,21 +262,49 @@
                     service: document.getElementById('referredService').value,
                     notes: document.getElementById('referralNotes').value
                 },
-                timestamp: new Date().toISOString()
+                timestamp: new Date().toLocaleString()
             };
 
-            // In a real implementation, send this to a backend
-            console.log('Referral submitted:', referralData);
-            
-            // You can add API call here:
-            // fetch('/api/referrals', { method: 'POST', body: JSON.stringify(referralData) });
+            // Map service values to readable names
+            const serviceNames = {
+                'buying': 'Buying a Home',
+                'selling': 'Selling a Home',
+                'both': 'Both Buying and Selling',
+                'investment': 'Investment Properties',
+                'other': 'Other'
+            };
 
-            // Show success message
-            document.getElementById('referralSuccessMessage').style.display = 'block';
-            this.reset();
+            // Create formatted email
+            const emailSubject = 'New Referral Submission - Wamsley Group';
+            const emailBody = `New Referral Submission
 
-            // Scroll to success message
-            document.getElementById('referralSuccessMessage').scrollIntoView({ behavior: 'smooth', block: 'center' });
+REFERRER INFORMATION:
+Name: ${referralData.referrer.firstName} ${referralData.referrer.lastName}
+Email: ${referralData.referrer.email}
+Phone: ${referralData.referrer.phone}
+
+REFERRED PERSON INFORMATION:
+Name: ${referralData.referred.firstName} ${referralData.referred.lastName}
+Email: ${referralData.referred.email}
+Phone: ${referralData.referred.phone}
+Service Interest: ${serviceNames[referralData.referred.service] || referralData.referred.service}
+
+Additional Notes: ${referralData.referred.notes || 'None provided'}
+
+Timestamp: ${referralData.timestamp}
+
+Please reach out to both the referrer and the referred person to follow up on this referral.`;
+
+            // Send email using mailto
+            const mailtoLink = `mailto:?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+            window.location.href = mailtoLink;
+
+            // Show success message and reset form
+            setTimeout(() => {
+                document.getElementById('referralSuccessMessage').style.display = 'block';
+                this.reset();
+                document.getElementById('referralSuccessMessage').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 500);
         });
     </script>
 </body>

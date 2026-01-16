@@ -1051,9 +1051,50 @@
         // Handle contact form submission
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            // Here you would typically send the form data to a server
-            alert('Thank you for your inquiry! We will contact you soon.');
-            this.reset();
+            
+            if (this.checkValidity()) {
+                const formData = {
+                    firstName: document.getElementById('firstName').value,
+                    lastName: document.getElementById('lastName').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    service: document.getElementById('service').value,
+                    timestamp: new Date().toLocaleString()
+                };
+
+                // Map service values to readable names
+                const serviceNames = {
+                    'service1': 'Buying a Home',
+                    'service2': 'Selling my Home',
+                    'service3': 'Obtaining information regarding my home value',
+                    'service4': 'Obtaining communication regarding market updates',
+                    'service5': 'Other'
+                };
+
+                // Create formatted email
+                const emailSubject = 'New Contact Form Submission - Calculator Page';
+                const emailBody = `New Contact Form Submission from Calculator Page
+
+Name: ${formData.firstName} ${formData.lastName}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Service Inquiry: ${serviceNames[formData.service] || formData.service}
+Timestamp: ${formData.timestamp}
+
+This inquiry came from the Calculator page, indicating interest in real estate calculations.`;
+
+                // Send email using mailto
+                const mailtoLink = `mailto:?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+                window.location.href = mailtoLink;
+
+                // Reset form and show confirmation after a brief delay
+                setTimeout(() => {
+                    this.reset();
+                    alert('Thank you for your inquiry! Your default email client has been opened with your request. Please send the email to complete your submission.');
+                }, 500);
+            } else {
+                this.reportValidity();
+            }
         });
     </script>
 
