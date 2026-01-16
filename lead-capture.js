@@ -117,7 +117,7 @@ Target URL: ${targetUrl}
 This lead was captured when the user attempted to view GlassHouse listings.`;
 
                 // Open mailto in a new window/tab to avoid losing the redirect
-                const mailtoLink = `mailto:?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+                const mailtoLink = `mailto:contact@wamsleygroup.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
                 
                 // Create a temporary link and click it
                 const tempLink = document.createElement('a');
