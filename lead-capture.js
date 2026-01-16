@@ -99,7 +99,7 @@
                     name: document.getElementById('leadName').value,
                     email: document.getElementById('leadEmail').value,
                     phone: document.getElementById('leadPhone').value,
-                    timestamp: new Date().toISOString(),
+                    timestamp: new Date().toLocaleString(),
                     source: 'GlassHouse Link Click'
                 };
 
@@ -116,16 +116,25 @@ Target URL: ${targetUrl}
 
 This lead was captured when the user attempted to view GlassHouse listings.`;
 
-                // Send email using mailto
+                // Open mailto in a new window/tab to avoid losing the redirect
                 const mailtoLink = `mailto:?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-                window.location.href = mailtoLink;
+                
+                // Create a temporary link and click it
+                const tempLink = document.createElement('a');
+                tempLink.href = mailtoLink;
+                tempLink.style.display = 'none';
+                document.body.appendChild(tempLink);
+                tempLink.click();
+                document.body.removeChild(tempLink);
 
-                // Small delay before proceeding to target URL
+                // Continue with original flow
+                setLeadCaptured();
+                modal.hide();
+                
+                // Redirect to target URL after a brief delay
                 setTimeout(() => {
-                    setLeadCaptured();
-                    modal.hide();
                     window.location.href = targetUrl;
-                }, 1000);
+                }, 500);
             } else {
                 form.reportValidity();
             }
