@@ -116,26 +116,22 @@ Target URL: ${targetUrl}
 
 This lead was captured when the user attempted to view GlassHouse listings.`;
 
-                // Send email via mailto (opens in new tab/window to preserve redirect)
+                // Send email via mailto
                 const mailtoLink = `mailto:contact@wamsleygroup.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
                 
-                // Use a hidden iframe to trigger mailto without blocking redirect
-                const iframe = document.createElement('iframe');
-                iframe.style.display = 'none';
-                iframe.src = mailtoLink;
-                document.body.appendChild(iframe);
+                // Open mailto link
+                // Note: This will open the user's email client
+                // Using location.href directly since we're redirecting anyway
+                window.location.href = mailtoLink;
                 
-                // Clean up after a moment
-                setTimeout(() => {
-                    document.body.removeChild(iframe);
-                }, 500);
-
-                // Continue with original flow
+                // Set lead captured flag
                 setLeadCaptured();
                 modal.hide();
                 
-                // Redirect to target URL
-                window.location.href = targetUrl;
+                // Redirect to target URL after giving time for mailto to trigger
+                setTimeout(() => {
+                    window.location.href = targetUrl;
+                }, 1000);
             } else {
                 form.reportValidity();
             }

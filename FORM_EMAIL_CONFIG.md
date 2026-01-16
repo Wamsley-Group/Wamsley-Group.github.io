@@ -10,21 +10,23 @@ All forms are currently configured to send emails to: `contact@wamsleygroup.com`
 
 If you need to change the recipient email address, search for `contact@wamsleygroup.com` in the following files and replace it with your desired email address:
 
-1. **index.html** - Main contact form (line ~185)
-2. **calculator.html** - Calculator page contact form (line ~1087)
-3. **referral.html** - Referral form (line ~299)
-4. **lead-capture.js** - Lead capture modal (line ~120)
+1. **index.html** - Main contact form
+2. **calculator.html** - Calculator page contact form
+3. **referral.html** - Referral form
+4. **lead-capture.js** - Lead capture modal
 
 ### Example:
-Change from:
+Search for:
 ```javascript
 mailto:contact@wamsleygroup.com?subject=...
 ```
 
-To:
+Replace with:
 ```javascript
 mailto:your-email@yourdomain.com?subject=...
 ```
+
+You can use your code editor's "Find and Replace" feature to update all instances at once.
 
 ## How It Works
 
