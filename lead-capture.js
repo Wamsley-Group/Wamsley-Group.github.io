@@ -116,18 +116,26 @@ Target URL: ${targetUrl}
 
 This lead was captured when the user attempted to view GlassHouse listings.`;
 
-                // Open mailto link
+                // Send email via mailto (opens in new tab/window to preserve redirect)
                 const mailtoLink = `mailto:contact@wamsleygroup.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-                window.open(mailtoLink, '_blank');
+                
+                // Use a hidden iframe to trigger mailto without blocking redirect
+                const iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframe.src = mailtoLink;
+                document.body.appendChild(iframe);
+                
+                // Clean up after a moment
+                setTimeout(() => {
+                    document.body.removeChild(iframe);
+                }, 500);
 
                 // Continue with original flow
                 setLeadCaptured();
                 modal.hide();
                 
-                // Redirect to target URL after a brief delay
-                setTimeout(() => {
-                    window.location.href = targetUrl;
-                }, 500);
+                // Redirect to target URL
+                window.location.href = targetUrl;
             } else {
                 form.reportValidity();
             }

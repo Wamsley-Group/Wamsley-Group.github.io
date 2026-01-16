@@ -112,6 +112,11 @@
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
 
+                <div id="contactSuccessMessage" class="alert alert-success mt-4" style="display: none;">
+                    <i class="fas fa-check-circle me-2"></i>
+                    <strong>Thank you for contacting us!</strong> Your default email client has been opened with your inquiry. Please send the email to complete your submission.
+                </div>
+
             </div>
         </section>
     </main>
@@ -185,10 +190,11 @@ Please follow up with this potential client as soon as possible.`;
                 const mailtoLink = `mailto:contact@wamsleygroup.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
                 window.location.href = mailtoLink;
 
-                // Reset form and show confirmation after a brief delay
+                // Reset form and show confirmation
                 setTimeout(() => {
                     this.reset();
-                    alert('Thank you for contacting us! Your default email client has been opened with your inquiry. Please send the email to complete your submission.');
+                    document.getElementById('contactSuccessMessage').style.display = 'block';
+                    document.getElementById('contactSuccessMessage').scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }, 500);
             } else {
                 this.reportValidity();
