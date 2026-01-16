@@ -698,11 +698,11 @@
                         <label for="service" class="form-label">Service Inquiry</label>
                         <select class="form-select" id="service" required>
                             <option value="" disabled selected>Select a service</option>
-                            <option value="service1">Buying a Home</option>
-                            <option value="service2">Selling my Home</option>
-                            <option value="service3">Obtaining information regarding my home value</option>
-                            <option value="service4">Obtaining communication regarding market updates</option>
-                            <option value="service5">Other</option>
+                            <option value="buying">Buying a Home</option>
+                            <option value="selling">Selling my Home</option>
+                            <option value="homevalue">Obtaining information regarding my home value</option>
+                            <option value="marketupdates">Obtaining communication regarding market updates</option>
+                            <option value="other">Other</option>
                         </select>
                     </div>
                     <div class="form-check mb-3">
@@ -1064,11 +1064,11 @@
 
                 // Map service values to readable names
                 const serviceNames = {
-                    'service1': 'Buying a Home',
-                    'service2': 'Selling my Home',
-                    'service3': 'Obtaining information regarding my home value',
-                    'service4': 'Obtaining communication regarding market updates',
-                    'service5': 'Other'
+                    'buying': 'Buying a Home',
+                    'selling': 'Selling my Home',
+                    'homevalue': 'Obtaining information regarding my home value',
+                    'marketupdates': 'Obtaining communication regarding market updates',
+                    'other': 'Other'
                 };
 
                 // Create formatted email
