@@ -1054,20 +1054,15 @@
         }, 100);
 
         // Handle contact form submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             if (this.checkValidity()) {
-                const formData = {
-                    firstName: document.getElementById('firstName').value,
-                    lastName: document.getElementById('lastName').value,
-                    email: document.getElementById('email').value,
-                    phone: document.getElementById('phone').value,
-                    service: document.getElementById('service').value,
-                    timestamp: new Date().toLocaleString()
-                };
+                const submitButton = this.querySelector('button[type="submit"]');
+                const originalButtonText = submitButton.textContent;
+                submitButton.disabled = true;
+                submitButton.textContent = 'Sending...';
 
-                // Map service values to readable names
                 const serviceNames = {
                     'buying': 'Buying a Home',
                     'selling': 'Selling my Home',
@@ -1076,28 +1071,48 @@
                     'other': 'Other'
                 };
 
-                // Create formatted email
-                const emailSubject = 'New Contact Form Submission - Calculator Page';
-                const emailBody = `New Contact Form Submission from Calculator Page
+                const formData = {
+                    formType: 'contact',
+                    firstName: document.getElementById('firstName').value,
+                    lastName: document.getElementById('lastName').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    service: serviceNames[document.getElementById('service').value] || document.getElementById('service').value,
+                    timestamp: new Date().toLocaleString()
+                };
 
-Name: ${formData.firstName} ${formData.lastName}
-Email: ${formData.email}
-Phone: ${formData.phone}
-Service Inquiry: ${serviceNames[formData.service] || formData.service}
-Timestamp: ${formData.timestamp}
+                try {
+                    const response = await fetch('/.netlify/functions/send-email', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    });
 
-This inquiry came from the Calculator page, indicating interest in real estate calculations.`;
+                    const result = await response.json();
 
-                // Send email using mailto
-                const mailtoLink = `mailto:pipoat@mail.uc.edu?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-                window.location.href = mailtoLink;
-
-                // Reset form and show confirmation
-                setTimeout(() => {
-                    this.reset();
-                    document.getElementById('contactSuccessMessage').style.display = 'block';
-                    document.getElementById('contactSuccessMessage').scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 500);
+                    if (response.ok) {
+                        this.reset();
+                        const successMsg = document.getElementById('contactSuccessMessage');
+                        successMsg.className = 'alert alert-success mt-4';
+                        successMsg.innerHTML = '<i class="fas fa-check-circle me-2"></i><strong>Thank you!</strong> Your message has been sent successfully. We\'ll get back to you soon.';
+                        successMsg.style.display = 'block';
+                        successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    } else {
+                        throw new Error(result.error || 'Failed to send message');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    const successMsg = document.getElementById('contactSuccessMessage');
+                    successMsg.className = 'alert alert-danger mt-4';
+                    successMsg.innerHTML = '<i class="fas fa-exclamation-circle me-2"></i><strong>Error:</strong> Failed to send message. Please try again or contact us directly at pipoat@mail.uc.edu.';
+                    successMsg.style.display = 'block';
+                    successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } finally {
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalButtonText;
+                }
             } else {
                 this.reportValidity();
             }

@@ -244,10 +244,24 @@
     <script src="lead-capture.js"></script>
     <script>
         // Handle referral form submission
-        document.getElementById('referralForm').addEventListener('submit', function(e) {
+        document.getElementById('referralForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.textContent;
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
+
+            const serviceNames = {
+                'buying': 'Buying a Home',
+                'selling': 'Selling a Home',
+                'both': 'Both Buying and Selling',
+                'investment': 'Investment Properties',
+                'other': 'Other'
+            };
+
             const referralData = {
+                formType: 'referral',
                 referrer: {
                     firstName: document.getElementById('referrerFirstName').value,
                     lastName: document.getElementById('referrerLastName').value,
@@ -259,52 +273,44 @@
                     lastName: document.getElementById('referredLastName').value,
                     email: document.getElementById('referredEmail').value,
                     phone: document.getElementById('referredPhone').value,
-                    service: document.getElementById('referredService').value,
+                    service: serviceNames[document.getElementById('referredService').value] || document.getElementById('referredService').value,
                     notes: document.getElementById('referralNotes').value
                 },
                 timestamp: new Date().toLocaleString()
             };
 
-            // Map service values to readable names
-            const serviceNames = {
-                'buying': 'Buying a Home',
-                'selling': 'Selling a Home',
-                'both': 'Both Buying and Selling',
-                'investment': 'Investment Properties',
-                'other': 'Other'
-            };
+            try {
+                const response = await fetch('/.netlify/functions/send-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(referralData)
+                });
 
-            // Create formatted email
-            const emailSubject = 'New Referral Submission - Wamsley Group';
-            const emailBody = `New Referral Submission
+                const result = await response.json();
 
-REFERRER INFORMATION:
-Name: ${referralData.referrer.firstName} ${referralData.referrer.lastName}
-Email: ${referralData.referrer.email}
-Phone: ${referralData.referrer.phone}
-
-REFERRED PERSON INFORMATION:
-Name: ${referralData.referred.firstName} ${referralData.referred.lastName}
-Email: ${referralData.referred.email}
-Phone: ${referralData.referred.phone}
-Service Interest: ${serviceNames[referralData.referred.service] || referralData.referred.service}
-
-Additional Notes: ${referralData.referred.notes || 'None provided'}
-
-Timestamp: ${referralData.timestamp}
-
-Please reach out to both the referrer and the referred person to follow up on this referral.`;
-
-            // Send email using mailto
-            const mailtoLink = `mailto:pipoat@mail.uc.edu?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-            window.location.href = mailtoLink;
-
-            // Show success message and reset form
-            setTimeout(() => {
-                document.getElementById('referralSuccessMessage').style.display = 'block';
-                this.reset();
-                document.getElementById('referralSuccessMessage').scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 500);
+                if (response.ok) {
+                    this.reset();
+                    const successMsg = document.getElementById('referralSuccessMessage');
+                    successMsg.className = 'alert alert-success mt-4';
+                    successMsg.innerHTML = '<i class="fas fa-check-circle me-2"></i><strong>Thank you for your referral!</strong> Your referral has been submitted successfully.';
+                    successMsg.style.display = 'block';
+                    successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    throw new Error(result.error || 'Failed to send referral');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                const successMsg = document.getElementById('referralSuccessMessage');
+                successMsg.className = 'alert alert-danger mt-4';
+                successMsg.innerHTML = '<i class="fas fa-exclamation-circle me-2"></i><strong>Error:</strong> Failed to submit referral. Please try again or contact us directly at pipoat@mail.uc.edu.';
+                successMsg.style.display = 'block';
+                successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
+            }
         });
     </script>
 </body>

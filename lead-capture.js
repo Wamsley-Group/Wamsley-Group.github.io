@@ -91,47 +91,56 @@
         });
 
         // Handle form submission
-        document.getElementById('leadCaptureSubmit').addEventListener('click', function() {
+        document.getElementById('leadCaptureSubmit').addEventListener('click', async function() {
             const form = document.getElementById('leadCaptureForm');
             
             if (form.checkValidity()) {
+                const submitButton = this;
+                const originalButtonText = submitButton.textContent;
+                submitButton.disabled = true;
+                submitButton.textContent = 'Sending...';
+
                 const leadData = {
+                    formType: 'lead',
                     name: document.getElementById('leadName').value,
                     email: document.getElementById('leadEmail').value,
                     phone: document.getElementById('leadPhone').value,
                     timestamp: new Date().toLocaleString(),
-                    source: 'GlassHouse Link Click'
+                    source: 'GlassHouse Link Click',
+                    targetUrl: targetUrl
                 };
 
-                // Create formatted email
-                const emailSubject = 'New Lead Capture - GlassHouse Link Click';
-                const emailBody = `New Lead Capture Submission
+                try {
+                    const response = await fetch('/.netlify/functions/send-email', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(leadData)
+                    });
 
-Name: ${leadData.name}
-Email: ${leadData.email}
-Phone: ${leadData.phone}
-Source: ${leadData.source}
-Timestamp: ${leadData.timestamp}
-Target URL: ${targetUrl}
+                    const result = await response.json();
 
-This lead was captured when the user attempted to view GlassHouse listings.`;
-
-                // Send email via mailto
-                const mailtoLink = `mailto:pipoat@mail.uc.edu?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-                
-                // Open mailto link
-                // Note: This will open the user's email client
-                // Using location.href directly since we're redirecting anyway
-                window.location.href = mailtoLink;
-                
-                // Set lead captured flag
-                setLeadCaptured();
-                modal.hide();
-                
-                // Redirect to target URL after giving time for mailto to trigger
-                setTimeout(() => {
+                    if (response.ok) {
+                        // Email sent successfully
+                        setLeadCaptured();
+                        modal.hide();
+                        
+                        // Redirect to target URL
+                        window.location.href = targetUrl;
+                    } else {
+                        throw new Error(result.error || 'Failed to send lead');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Failed to submit your information. You will be redirected to the listings page.');
+                    setLeadCaptured();
+                    modal.hide();
                     window.location.href = targetUrl;
-                }, 1000);
+                } finally {
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalButtonText;
+                }
             } else {
                 form.reportValidity();
             }
