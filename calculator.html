@@ -37,6 +37,7 @@
                     <li class="nav-item"><a class="nav-link" href="about-us.html">About Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="local-spotlight.html">Local Spotlight</a></li>
                     <li class="nav-item"><a class="nav-link" href="whats-new.html">What's New</a></li>
+                    <li class="nav-item"><a class="nav-link" href="referral.html">Referrals</a></li>
                     <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
                 </ul>
             </div>
@@ -45,12 +46,39 @@
 
     <!-- Main Content -->
     <main>
-        <!-- Home Affordability Calculator Section -->
+        <!-- Calculator Section -->
         <section id="calculator" class="py-5">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-10 mx-auto">
-                        <h1 class="text-center mb-5">Home Affordability Calculator</h1>
+                    <div class="col-lg-11 mx-auto">
+                        <h1 class="text-center mb-5">Real Estate Calculators</h1>
+                        
+                        <!-- Calculator Tabs -->
+                        <ul class="nav nav-tabs mb-4" id="calculatorTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="affordability-tab" data-bs-toggle="tab" data-bs-target="#affordability" type="button" role="tab">Home Affordability</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="mortgage-tab" data-bs-toggle="tab" data-bs-target="#mortgage" type="button" role="tab">Mortgage Payment</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="equity-tab" data-bs-toggle="tab" data-bs-target="#equity" type="button" role="tab">Home Equity</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="cashout-tab" data-bs-toggle="tab" data-bs-target="#cashout" type="button" role="tab">Cash-Out Refinance</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="seller-tab" data-bs-toggle="tab" data-bs-target="#seller" type="button" role="tab">Seller Net Proceeds</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="investment-tab" data-bs-toggle="tab" data-bs-target="#investment" type="button" role="tab">Investment Cashflow</button>
+                            </li>
+                        </ul>
+
+                        <!-- Tab Content -->
+                        <div class="tab-content" id="calculatorTabContent">
+                            <!-- Home Affordability Calculator -->
+                            <div class="tab-pane fade show active" id="affordability" role="tabpanel">
                         
                         <div class="row">
                             <!-- Input Controls -->
@@ -174,6 +202,466 @@
                                 </div>
                             </div>
                         </div>
+                            </div>
+
+                            <!-- Mortgage Payment Calculator -->
+                            <div class="tab-pane fade" id="mortgage" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card shadow-sm">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-4">Loan Details</h5>
+                                                
+                                                <div class="mb-4">
+                                                    <label for="mortHomePrice" class="form-label">Home Price</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">$</span>
+                                                        <input type="number" class="form-control" id="mortHomePrice" value="300000" min="0" step="10000">
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-4">
+                                                    <label for="mortDownPayment" class="form-label">Down Payment</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">$</span>
+                                                        <input type="number" class="form-control" id="mortDownPayment" value="60000" min="0" step="5000">
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-4">
+                                                    <label for="mortInterestRate" class="form-label">Interest Rate (%)</label>
+                                                    <input type="number" class="form-control" id="mortInterestRate" value="7.0" min="0" max="15" step="0.1">
+                                                </div>
+
+                                                <div class="mb-4">
+                                                    <label for="mortLoanTerm" class="form-label">Loan Term (Years)</label>
+                                                    <select class="form-select" id="mortLoanTerm">
+                                                        <option value="15">15 Years</option>
+                                                        <option value="20">20 Years</option>
+                                                        <option value="30" selected>30 Years</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="mb-4">
+                                                    <label for="mortPropertyTax" class="form-label">Annual Property Tax</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">$</span>
+                                                        <input type="number" class="form-control" id="mortPropertyTax" value="3600" min="0" step="100">
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-4">
+                                                    <label for="mortInsurance" class="form-label">Annual Home Insurance</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">$</span>
+                                                        <input type="number" class="form-control" id="mortInsurance" value="1200" min="0" step="100">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="card shadow-sm bg-light">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-4">Monthly Payment</h5>
+                                                
+                                                <div class="mb-4 p-3 bg-white rounded border-left-primary">
+                                                    <div class="small text-muted">Total Monthly Payment</div>
+                                                    <div class="h3 text-primary font-weight-bold" id="mortMonthlyPayment">$0</div>
+                                                </div>
+
+                                                <div class="mb-4 p-3 bg-white rounded">
+                                                    <div class="small text-muted">Loan Amount</div>
+                                                    <div class="h4" id="mortLoanAmount">$0</div>
+                                                </div>
+
+                                                <div class="p-3 bg-white rounded">
+                                                    <div class="small text-muted mb-2">Payment Breakdown</div>
+                                                    <div class="row mb-2">
+                                                        <div class="col-6"><small>Principal & Interest:</small></div>
+                                                        <div class="col-6 text-end"><small id="mortPI">$0</small></div>
+                                                    </div>
+                                                    <div class="row mb-2">
+                                                        <div class="col-6"><small>Property Tax:</small></div>
+                                                        <div class="col-6 text-end"><small id="mortTax">$0</small></div>
+                                                    </div>
+                                                    <div class="row mb-2">
+                                                        <div class="col-6"><small>Insurance:</small></div>
+                                                        <div class="col-6 text-end"><small id="mortIns">$0</small></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="alert alert-info mt-4" role="alert">
+                                                    <small><strong>Note:</strong> This is an estimate. Actual payments may vary based on lender requirements.</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Home Equity Calculator -->
+                            <div class="tab-pane fade" id="equity" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card shadow-sm">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-4">Property Information</h5>
+                                                
+                                                <div class="mb-4">
+                                                    <label for="equityHomeValue" class="form-label">Current Home Value</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">$</span>
+                                                        <input type="number" class="form-control" id="equityHomeValue" value="350000" min="0" step="10000">
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-4">
+                                                    <label for="equityMortgageBalance" class="form-label">Outstanding Mortgage Balance</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">$</span>
+                                                        <input type="number" class="form-control" id="equityMortgageBalance" value="250000" min="0" step="10000">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="card shadow-sm bg-light">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-4">Your Home Equity</h5>
+                                                
+                                                <div class="mb-4 p-3 bg-white rounded border-left-primary">
+                                                    <div class="small text-muted">Total Home Equity</div>
+                                                    <div class="h3 text-primary font-weight-bold" id="equityAmount">$0</div>
+                                                </div>
+
+                                                <div class="mb-4 p-3 bg-white rounded">
+                                                    <div class="small text-muted">Equity Percentage</div>
+                                                    <div class="h4" id="equityPercentage">0%</div>
+                                                </div>
+
+                                                <div class="mb-4 p-3 bg-white rounded">
+                                                    <div class="small text-muted">Loan-to-Value (LTV) Ratio</div>
+                                                    <div class="h4" id="equityLTV">0%</div>
+                                                    <small class="text-muted">Lower is better for refinancing</small>
+                                                </div>
+
+                                                <div class="alert alert-info mt-4" role="alert">
+                                                    <small><strong>Tip:</strong> Most lenders require at least 20% equity (80% LTV) for home equity loans.</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Cash-Out Refinance Calculator -->
+                            <div class="tab-pane fade" id="cashout" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card shadow-sm">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-4">Refinance Details</h5>
+                                                
+                                                <div class="mb-4">
+                                                    <label for="cashoutHomeValue" class="form-label">Current Home Value</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">$</span>
+                                                        <input type="number" class="form-control" id="cashoutHomeValue" value="400000" min="0" step="10000">
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-4">
+                                                    <label for="cashoutCurrentBalance" class="form-label">Current Mortgage Balance</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">$</span>
+                                                        <input type="number" class="form-control" id="cashoutCurrentBalance" value="250000" min="0" step="10000">
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-4">
+                                                    <label for="cashoutAmount" class="form-label">Desired Cash-Out Amount</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">$</span>
+                                                        <input type="number" class="form-control" id="cashoutAmount" value="50000" min="0" step="5000">
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-4">
+                                                    <label for="cashoutInterestRate" class="form-label">New Interest Rate (%)</label>
+                                                    <input type="number" class="form-control" id="cashoutInterestRate" value="7.0" min="0" max="15" step="0.1">
+                                                </div>
+
+                                                <div class="mb-4">
+                                                    <label for="cashoutLoanTerm" class="form-label">New Loan Term (Years)</label>
+                                                    <select class="form-select" id="cashoutLoanTerm">
+                                                        <option value="15">15 Years</option>
+                                                        <option value="20">20 Years</option>
+                                                        <option value="30" selected>30 Years</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="card shadow-sm bg-light">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-4">Refinance Analysis</h5>
+                                                
+                                                <div class="mb-4 p-3 bg-white rounded border-left-primary">
+                                                    <div class="small text-muted">Cash You'll Receive</div>
+                                                    <div class="h3 text-primary font-weight-bold" id="cashoutReceive">$0</div>
+                                                </div>
+
+                                                <div class="mb-4 p-3 bg-white rounded">
+                                                    <div class="small text-muted">New Loan Amount</div>
+                                                    <div class="h4" id="cashoutNewLoan">$0</div>
+                                                </div>
+
+                                                <div class="mb-4 p-3 bg-white rounded">
+                                                    <div class="small text-muted">New Monthly Payment (P&I)</div>
+                                                    <div class="h4" id="cashoutNewPayment">$0</div>
+                                                </div>
+
+                                                <div class="mb-4 p-3 bg-white rounded">
+                                                    <div class="small text-muted">New LTV Ratio</div>
+                                                    <div class="h4" id="cashoutNewLTV">0%</div>
+                                                    <small class="text-muted">Most lenders limit to 80% LTV</small>
+                                                </div>
+
+                                                <div class="alert alert-info mt-4" role="alert">
+                                                    <small><strong>Note:</strong> This doesn't include closing costs, which typically range from 2-5% of loan amount.</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Seller Net Proceeds Calculator -->
+                            <div class="tab-pane fade" id="seller" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card shadow-sm">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-4">Sale Information</h5>
+                                                
+                                                <div class="mb-4">
+                                                    <label for="sellerSalePrice" class="form-label">Expected Sale Price</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">$</span>
+                                                        <input type="number" class="form-control" id="sellerSalePrice" value="400000" min="0" step="10000">
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-4">
+                                                    <label for="sellerMortgageBalance" class="form-label">Mortgage Payoff Amount</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">$</span>
+                                                        <input type="number" class="form-control" id="sellerMortgageBalance" value="250000" min="0" step="10000">
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-4">
+                                                    <label for="sellerCommission" class="form-label">Agent Commission (%)</label>
+                                                    <input type="number" class="form-control" id="sellerCommission" value="6.0" min="0" max="10" step="0.5">
+                                                    <small class="text-muted">Typically 5-6%</small>
+                                                </div>
+
+                                                <div class="mb-4">
+                                                    <label for="sellerClosingCosts" class="form-label">Other Closing Costs</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">$</span>
+                                                        <input type="number" class="form-control" id="sellerClosingCosts" value="5000" min="0" step="500">
+                                                    </div>
+                                                    <small class="text-muted">Title fees, transfer taxes, etc.</small>
+                                                </div>
+
+                                                <div class="mb-4">
+                                                    <label for="sellerRepairs" class="form-label">Repairs/Concessions</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">$</span>
+                                                        <input type="number" class="form-control" id="sellerRepairs" value="0" min="0" step="500">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="card shadow-sm bg-light">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-4">Net Proceeds</h5>
+                                                
+                                                <div class="mb-4 p-3 bg-white rounded border-left-primary">
+                                                    <div class="small text-muted">Estimated Net Proceeds</div>
+                                                    <div class="h3 text-primary font-weight-bold" id="sellerNetProceeds">$0</div>
+                                                </div>
+
+                                                <div class="p-3 bg-white rounded">
+                                                    <div class="small text-muted mb-2">Cost Breakdown</div>
+                                                    <div class="row mb-2">
+                                                        <div class="col-6"><small>Sale Price:</small></div>
+                                                        <div class="col-6 text-end"><small id="sellerSalePriceDisplay">$0</small></div>
+                                                    </div>
+                                                    <div class="row mb-2 text-danger">
+                                                        <div class="col-6"><small>Mortgage Payoff:</small></div>
+                                                        <div class="col-6 text-end"><small id="sellerMortgageDisplay">-$0</small></div>
+                                                    </div>
+                                                    <div class="row mb-2 text-danger">
+                                                        <div class="col-6"><small>Agent Commission:</small></div>
+                                                        <div class="col-6 text-end"><small id="sellerCommissionDisplay">-$0</small></div>
+                                                    </div>
+                                                    <div class="row mb-2 text-danger">
+                                                        <div class="col-6"><small>Closing Costs:</small></div>
+                                                        <div class="col-6 text-end"><small id="sellerClosingDisplay">-$0</small></div>
+                                                    </div>
+                                                    <div class="row mb-2 text-danger">
+                                                        <div class="col-6"><small>Repairs/Concessions:</small></div>
+                                                        <div class="col-6 text-end"><small id="sellerRepairsDisplay">-$0</small></div>
+                                                    </div>
+                                                    <div class="row border-top pt-2">
+                                                        <div class="col-6"><small class="font-weight-bold">Net to Seller:</small></div>
+                                                        <div class="col-6 text-end"><small class="font-weight-bold" id="sellerNetDisplay">$0</small></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="alert alert-info mt-4" role="alert">
+                                                    <small><strong>Note:</strong> This is an estimate. Actual costs may vary. Consult with your agent for accurate figures.</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Investment Cashflow Calculator -->
+                            <div class="tab-pane fade" id="investment" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card shadow-sm">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-4">Investment Property Details</h5>
+                                                
+                                                <div class="mb-4">
+                                                    <label for="invPurchasePrice" class="form-label">Purchase Price</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">$</span>
+                                                        <input type="number" class="form-control" id="invPurchasePrice" value="250000" min="0" step="10000">
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-4">
+                                                    <label for="invDownPayment" class="form-label">Down Payment (%)</label>
+                                                    <input type="number" class="form-control" id="invDownPayment" value="25" min="0" max="100" step="5">
+                                                </div>
+
+                                                <div class="mb-4">
+                                                    <label for="invInterestRate" class="form-label">Interest Rate (%)</label>
+                                                    <input type="number" class="form-control" id="invInterestRate" value="8.0" min="0" max="15" step="0.1">
+                                                </div>
+
+                                                <div class="mb-4">
+                                                    <label for="invMonthlyRent" class="form-label">Monthly Rent Income</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">$</span>
+                                                        <input type="number" class="form-control" id="invMonthlyRent" value="2000" min="0" step="100">
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-4">
+                                                    <label for="invPropertyTax" class="form-label">Annual Property Tax</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">$</span>
+                                                        <input type="number" class="form-control" id="invPropertyTax" value="3000" min="0" step="100">
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-4">
+                                                    <label for="invInsurance" class="form-label">Annual Insurance</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">$</span>
+                                                        <input type="number" class="form-control" id="invInsurance" value="1500" min="0" step="100">
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-4">
+                                                    <label for="invMaintenance" class="form-label">Monthly Maintenance/HOA</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">$</span>
+                                                        <input type="number" class="form-control" id="invMaintenance" value="200" min="0" step="50">
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-4">
+                                                    <label for="invVacancyRate" class="form-label">Vacancy Rate (%)</label>
+                                                    <input type="number" class="form-control" id="invVacancyRate" value="5" min="0" max="50" step="1">
+                                                    <small class="text-muted">Typical: 5-10%</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="card shadow-sm bg-light">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-4">Investment Analysis</h5>
+                                                
+                                                <div class="mb-4 p-3 bg-white rounded border-left-primary">
+                                                    <div class="small text-muted">Monthly Cashflow</div>
+                                                    <div class="h3 font-weight-bold" id="invMonthlyCashflow">$0</div>
+                                                </div>
+
+                                                <div class="mb-4 p-3 bg-white rounded">
+                                                    <div class="small text-muted">Annual Cashflow</div>
+                                                    <div class="h4" id="invAnnualCashflow">$0</div>
+                                                </div>
+
+                                                <div class="mb-4 p-3 bg-white rounded">
+                                                    <div class="small text-muted">Cap Rate</div>
+                                                    <div class="h4" id="invCapRate">0%</div>
+                                                    <small class="text-muted">Annual NOI / Purchase Price</small>
+                                                </div>
+
+                                                <div class="mb-4 p-3 bg-white rounded">
+                                                    <div class="small text-muted">Cash-on-Cash Return</div>
+                                                    <div class="h4" id="invCashOnCash">0%</div>
+                                                    <small class="text-muted">Annual cashflow / Cash invested</small>
+                                                </div>
+
+                                                <div class="p-3 bg-white rounded">
+                                                    <div class="small text-muted mb-2">Monthly Breakdown</div>
+                                                    <div class="row mb-2 text-success">
+                                                        <div class="col-6"><small>Gross Rent Income:</small></div>
+                                                        <div class="col-6 text-end"><small id="invRentDisplay">$0</small></div>
+                                                    </div>
+                                                    <div class="row mb-2 text-danger">
+                                                        <div class="col-6"><small>Mortgage (P&I):</small></div>
+                                                        <div class="col-6 text-end"><small id="invMortgageDisplay">-$0</small></div>
+                                                    </div>
+                                                    <div class="row mb-2 text-danger">
+                                                        <div class="col-6"><small>Operating Expenses:</small></div>
+                                                        <div class="col-6 text-end"><small id="invExpensesDisplay">-$0</small></div>
+                                                    </div>
+                                                    <div class="row mb-2 text-danger">
+                                                        <div class="col-6"><small>Vacancy Loss:</small></div>
+                                                        <div class="col-6 text-end"><small id="invVacancyDisplay">-$0</small></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="alert alert-info mt-4" role="alert">
+                                                    <small><strong>Good Investment:</strong> Look for positive cashflow and cap rate above 6-8%.</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -229,6 +717,42 @@
         }
         .font-weight-bold {
             font-weight: 600;
+        }
+        /* Fix contrast issues for calculator page */
+        #calculator {
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        #calculator h1,
+        #calculator h2,
+        #calculator h5,
+        #calculator .card-title {
+            color: #212529;
+        }
+        #calculator .form-label,
+        #calculator label {
+            color: #212529;
+            font-weight: 500;
+        }
+        #calculator .text-muted,
+        #calculator .form-text {
+            color: #6c757d !important;
+        }
+        #calculator .nav-link {
+            color: #495057;
+        }
+        #calculator .nav-link.active {
+            color: #0d6efd;
+        }
+        /* Ensure contact section maintains dark theme */
+        .contact-class {
+            background-color: #212529;
+            color: white;
+        }
+        .contact-class h2,
+        .contact-class p,
+        .contact-class label {
+            color: white;
         }
     </style>
 
@@ -329,6 +853,196 @@
         // Calculate on page load
         calculateAffordability();
 
+        // Mortgage Payment Calculator
+        function calculateMortgage() {
+            const homePrice = parseFloat(document.getElementById('mortHomePrice').value) || 0;
+            const downPayment = parseFloat(document.getElementById('mortDownPayment').value) || 0;
+            const interestRate = parseFloat(document.getElementById('mortInterestRate').value) || 0;
+            const loanTerm = parseInt(document.getElementById('mortLoanTerm').value) || 30;
+            const propertyTax = parseFloat(document.getElementById('mortPropertyTax').value) || 0;
+            const insurance = parseFloat(document.getElementById('mortInsurance').value) || 0;
+
+            const loanAmount = Math.max(0, homePrice - downPayment);
+            const monthlyInterestRate = interestRate / 100 / 12;
+            const numberOfPayments = loanTerm * 12;
+            const monthlyTax = propertyTax / 12;
+            const monthlyInsurance = insurance / 12;
+
+            let principalAndInterest = 0;
+            if (monthlyInterestRate > 0 && loanAmount > 0) {
+                principalAndInterest = (loanAmount * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments));
+            }
+
+            const totalMonthlyPayment = principalAndInterest + monthlyTax + monthlyInsurance;
+
+            document.getElementById('mortLoanAmount').textContent = '$' + formatCurrency(loanAmount);
+            document.getElementById('mortMonthlyPayment').textContent = '$' + formatCurrency(totalMonthlyPayment);
+            document.getElementById('mortPI').textContent = '$' + formatCurrency(principalAndInterest);
+            document.getElementById('mortTax').textContent = '$' + formatCurrency(monthlyTax);
+            document.getElementById('mortIns').textContent = '$' + formatCurrency(monthlyInsurance);
+        }
+
+        // Home Equity Calculator
+        function calculateEquity() {
+            const homeValue = parseFloat(document.getElementById('equityHomeValue').value) || 0;
+            const mortgageBalance = parseFloat(document.getElementById('equityMortgageBalance').value) || 0;
+
+            const equity = homeValue - mortgageBalance;
+            const equityPercentage = homeValue > 0 ? (equity / homeValue) * 100 : 0;
+            const ltv = homeValue > 0 ? (mortgageBalance / homeValue) * 100 : 0;
+
+            document.getElementById('equityAmount').textContent = '$' + formatCurrency(equity);
+            document.getElementById('equityPercentage').textContent = equityPercentage.toFixed(1) + '%';
+            document.getElementById('equityLTV').textContent = ltv.toFixed(1) + '%';
+        }
+
+        // Cash-Out Refinance Calculator
+        function calculateCashout() {
+            const homeValue = parseFloat(document.getElementById('cashoutHomeValue').value) || 0;
+            const currentBalance = parseFloat(document.getElementById('cashoutCurrentBalance').value) || 0;
+            const cashoutAmount = parseFloat(document.getElementById('cashoutAmount').value) || 0;
+            const interestRate = parseFloat(document.getElementById('cashoutInterestRate').value) || 0;
+            const loanTerm = parseInt(document.getElementById('cashoutLoanTerm').value) || 30;
+
+            const newLoanAmount = currentBalance + cashoutAmount;
+            const monthlyInterestRate = interestRate / 100 / 12;
+            const numberOfPayments = loanTerm * 12;
+            const newLTV = homeValue > 0 ? (newLoanAmount / homeValue) * 100 : 0;
+
+            let newMonthlyPayment = 0;
+            if (monthlyInterestRate > 0 && newLoanAmount > 0) {
+                newMonthlyPayment = (newLoanAmount * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments));
+            }
+
+            document.getElementById('cashoutReceive').textContent = '$' + formatCurrency(cashoutAmount);
+            document.getElementById('cashoutNewLoan').textContent = '$' + formatCurrency(newLoanAmount);
+            document.getElementById('cashoutNewPayment').textContent = '$' + formatCurrency(newMonthlyPayment);
+            document.getElementById('cashoutNewLTV').textContent = newLTV.toFixed(1) + '%';
+        }
+
+        // Seller Net Proceeds Calculator
+        function calculateSellerProceeds() {
+            const salePrice = parseFloat(document.getElementById('sellerSalePrice').value) || 0;
+            const mortgageBalance = parseFloat(document.getElementById('sellerMortgageBalance').value) || 0;
+            const commissionRate = parseFloat(document.getElementById('sellerCommission').value) || 0;
+            const closingCosts = parseFloat(document.getElementById('sellerClosingCosts').value) || 0;
+            const repairs = parseFloat(document.getElementById('sellerRepairs').value) || 0;
+
+            const commission = salePrice * (commissionRate / 100);
+            const netProceeds = salePrice - mortgageBalance - commission - closingCosts - repairs;
+
+            document.getElementById('sellerNetProceeds').textContent = '$' + formatCurrency(netProceeds);
+            document.getElementById('sellerSalePriceDisplay').textContent = '$' + formatCurrency(salePrice);
+            document.getElementById('sellerMortgageDisplay').textContent = '-$' + formatCurrency(mortgageBalance);
+            document.getElementById('sellerCommissionDisplay').textContent = '-$' + formatCurrency(commission);
+            document.getElementById('sellerClosingDisplay').textContent = '-$' + formatCurrency(closingCosts);
+            document.getElementById('sellerRepairsDisplay').textContent = '-$' + formatCurrency(repairs);
+            document.getElementById('sellerNetDisplay').textContent = '$' + formatCurrency(netProceeds);
+        }
+
+        // Investment Cashflow Calculator
+        function calculateInvestment() {
+            const purchasePrice = parseFloat(document.getElementById('invPurchasePrice').value) || 0;
+            const downPaymentPct = parseFloat(document.getElementById('invDownPayment').value) || 0;
+            const interestRate = parseFloat(document.getElementById('invInterestRate').value) || 0;
+            const monthlyRent = parseFloat(document.getElementById('invMonthlyRent').value) || 0;
+            const propertyTax = parseFloat(document.getElementById('invPropertyTax').value) || 0;
+            const insurance = parseFloat(document.getElementById('invInsurance').value) || 0;
+            const maintenance = parseFloat(document.getElementById('invMaintenance').value) || 0;
+            const vacancyRate = parseFloat(document.getElementById('invVacancyRate').value) || 0;
+
+            const downPaymentAmount = purchasePrice * (downPaymentPct / 100);
+            const loanAmount = purchasePrice - downPaymentAmount;
+            const monthlyInterestRate = interestRate / 100 / 12;
+            const numberOfPayments = 30 * 12; // 30-year loan
+
+            let mortgagePayment = 0;
+            if (monthlyInterestRate > 0 && loanAmount > 0) {
+                mortgagePayment = (loanAmount * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments));
+            }
+
+            const monthlyTax = propertyTax / 12;
+            const monthlyInsurance = insurance / 12;
+            const monthlyOperatingExpenses = monthlyTax + monthlyInsurance + maintenance;
+            const vacancyLoss = monthlyRent * (vacancyRate / 100);
+            const effectiveRent = monthlyRent - vacancyLoss;
+
+            const monthlyCashflow = effectiveRent - mortgagePayment - monthlyOperatingExpenses;
+            const annualCashflow = monthlyCashflow * 12;
+
+            // NOI = Effective Gross Income - Operating Expenses (not including mortgage)
+            const annualNOI = (effectiveRent - monthlyOperatingExpenses) * 12;
+            const capRate = purchasePrice > 0 ? (annualNOI / purchasePrice) * 100 : 0;
+            
+            const cashInvested = downPaymentAmount;
+            const cashOnCashReturn = cashInvested > 0 ? (annualCashflow / cashInvested) * 100 : 0;
+
+            // Update displays with color coding
+            const cashflowElement = document.getElementById('invMonthlyCashflow');
+            cashflowElement.textContent = '$' + formatCurrency(monthlyCashflow);
+            cashflowElement.className = monthlyCashflow >= 0 ? 'h3 text-success font-weight-bold' : 'h3 text-danger font-weight-bold';
+
+            document.getElementById('invAnnualCashflow').textContent = '$' + formatCurrency(annualCashflow);
+            document.getElementById('invCapRate').textContent = capRate.toFixed(2) + '%';
+            document.getElementById('invCashOnCash').textContent = cashOnCashReturn.toFixed(2) + '%';
+            document.getElementById('invRentDisplay').textContent = '$' + formatCurrency(monthlyRent);
+            document.getElementById('invMortgageDisplay').textContent = '-$' + formatCurrency(mortgagePayment);
+            document.getElementById('invExpensesDisplay').textContent = '-$' + formatCurrency(monthlyOperatingExpenses);
+            document.getElementById('invVacancyDisplay').textContent = '-$' + formatCurrency(vacancyLoss);
+        }
+
+        // Add event listeners for all calculators
+        // Mortgage calculator
+        ['mortHomePrice', 'mortDownPayment', 'mortInterestRate', 'mortLoanTerm', 'mortPropertyTax', 'mortInsurance'].forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.addEventListener('input', calculateMortgage);
+                element.addEventListener('change', calculateMortgage);
+            }
+        });
+
+        // Equity calculator
+        ['equityHomeValue', 'equityMortgageBalance'].forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.addEventListener('input', calculateEquity);
+            }
+        });
+
+        // Cashout calculator
+        ['cashoutHomeValue', 'cashoutCurrentBalance', 'cashoutAmount', 'cashoutInterestRate', 'cashoutLoanTerm'].forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.addEventListener('input', calculateCashout);
+                element.addEventListener('change', calculateCashout);
+            }
+        });
+
+        // Seller proceeds calculator
+        ['sellerSalePrice', 'sellerMortgageBalance', 'sellerCommission', 'sellerClosingCosts', 'sellerRepairs'].forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.addEventListener('input', calculateSellerProceeds);
+            }
+        });
+
+        // Investment calculator
+        ['invPurchasePrice', 'invDownPayment', 'invInterestRate', 'invMonthlyRent', 'invPropertyTax', 'invInsurance', 'invMaintenance', 'invVacancyRate'].forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.addEventListener('input', calculateInvestment);
+            }
+        });
+
+        // Calculate all on page load
+        setTimeout(() => {
+            calculateMortgage();
+            calculateEquity();
+            calculateCashout();
+            calculateSellerProceeds();
+            calculateInvestment();
+        }, 100);
+
         // Handle contact form submission
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -366,5 +1080,6 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lead-capture.js"></script>
 </body>
 </html>

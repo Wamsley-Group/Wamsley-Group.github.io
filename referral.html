@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Refer a friend to Wamsley Group and help them find their dream home in Dayton, Ohio.">
+    <meta name="keywords" content="real estate referral, Dayton Ohio real estate, Wamsley Group referral">
+    <meta name="author" content="Wamsley Group">
+    <title>Referral Program | Wamsley Group</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Fix contrast issues for referral page */
+        main {
+            background-color: #ffffff;
+            color: #212529;
+        }
+        .bg-light {
+            background-color: #f8f9fa !important;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #212529;
+        }
+        .card-title {
+            color: #212529;
+        }
+        label, .form-label {
+            color: #212529;
+            font-weight: 500;
+        }
+        .text-muted, .form-text, small {
+            color: #6c757d !important;
+        }
+        p {
+            color: #495057;
+        }
+        .lead {
+            color: #212529;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Main navigation">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="index.html" aria-label="Wamsley Group home">
+                <img src="./assets/glasshouse-logo.png" alt="Wamsley Group logo" height="40" class="d-inline-block align-text-top me-2 toplogo" loading="lazy">
+                <span>Wamsley Group</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="buying.html">Buy</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sell.html">Sell</a></li>
+                    <li class="nav-item"><a class="nav-link" href="calculator.html">Calculator</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about-us.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="local-spotlight.html">Local Spotlight</a></li>
+                    <li class="nav-item"><a class="nav-link" href="whats-new.html">What's New</a></li>
+                    <li class="nav-item"><a class="nav-link" href="referral.html">Referrals</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Referral Hero Section -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h1 class="display-4 mb-4">Referral Program</h1>
+                        <p class="lead">Know someone looking to buy or sell a home in Dayton? Refer them to Wamsley Group and help them find the perfect real estate solution!</p>
+                        <p>We appreciate your trust and referrals. Fill out the form below to connect your friends and family with expert real estate services.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Referral Form Section -->
+        <section class="py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="card shadow-sm">
+                            <div class="card-body p-4">
+                                <h2 class="card-title mb-4">Submit a Referral</h2>
+                                <form id="referralForm">
+                                    <!-- Referrer Information -->
+                                    <div class="mb-4">
+                                        <h5 class="mb-3 text-primary">Your Information (Referrer)</h5>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="referrerFirstName" class="form-label">First Name <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="referrerFirstName" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="referrerLastName" class="form-label">Last Name <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="referrerLastName" required>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="referrerEmail" class="form-label">Email <span class="text-danger">*</span></label>
+                                                <input type="email" class="form-control" id="referrerEmail" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="referrerPhone" class="form-label">Phone Number <span class="text-danger">*</span></label>
+                                                <input type="tel" class="form-control" id="referrerPhone" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <hr class="my-4">
+
+                                    <!-- Referred Person Information -->
+                                    <div class="mb-4">
+                                        <h5 class="mb-3 text-primary">Person You're Referring</h5>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="referredFirstName" class="form-label">First Name <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="referredFirstName" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="referredLastName" class="form-label">Last Name <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="referredLastName" required>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="referredEmail" class="form-label">Email <span class="text-danger">*</span></label>
+                                                <input type="email" class="form-control" id="referredEmail" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="referredPhone" class="form-label">Phone Number <span class="text-danger">*</span></label>
+                                                <input type="tel" class="form-control" id="referredPhone" required>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="referredService" class="form-label">What service are they interested in? <span class="text-danger">*</span></label>
+                                            <select class="form-select" id="referredService" required>
+                                                <option value="" disabled selected>Select a service</option>
+                                                <option value="buying">Buying a Home</option>
+                                                <option value="selling">Selling a Home</option>
+                                                <option value="both">Both Buying and Selling</option>
+                                                <option value="investment">Investment Properties</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="referralNotes" class="form-label">Additional Information (Optional)</label>
+                                            <textarea class="form-control" id="referralNotes" rows="3" placeholder="Any additional details that might help us serve them better..."></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-check mb-4">
+                                        <input type="checkbox" class="form-check-input" id="referralConsent" required>
+                                        <label class="form-check-label" for="referralConsent">
+                                            I confirm that I have permission to share this person's contact information with Wamsley Group, and I consent to Wamsley Group contacting both parties regarding this referral.
+                                        </label>
+                                    </div>
+
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary btn-lg">Submit Referral</button>
+                                    </div>
+                                </form>
+
+                                <div id="referralSuccessMessage" class="alert alert-success mt-4" style="display: none;">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    <strong>Thank you for your referral!</strong> We'll reach out to both you and your referral soon.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h2 class="text-center mb-4">Why Refer to Wamsley Group?</h2>
+                        <div class="row g-4">
+                            <div class="col-md-4 text-center">
+                                <i class="fas fa-award fa-3x text-primary mb-3"></i>
+                                <h5>Expert Service</h5>
+                                <p>Your referrals will receive the same exceptional service and expertise you've experienced.</p>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <i class="fas fa-handshake fa-3x text-primary mb-3"></i>
+                                <h5>Trusted Partnership</h5>
+                                <p>We value relationships and treat every referral with the utmost care and professionalism.</p>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <i class="fas fa-home fa-3x text-primary mb-3"></i>
+                                <h5>Local Expertise</h5>
+                                <p>Deep knowledge of the Dayton area ensures the best outcomes for buyers and sellers.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <div class="mb-3">
+                <a href="https://www.linkedin.com/in/jared-wamsley-8aa379155/" class="btn btn-circle btn-linkedin btn-lg mx-2" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin-in fa-lg"></i>
+                </a>
+                <a href="https://www.instagram.com/wamsleygroup/" class="btn btn-circle btn-instagram btn-lg mx-2" aria-label="Instagram">
+                    <i class="fab fa-instagram fa-lg"></i>
+                </a>
+            </div>
+            <br>
+            <div class="d-flex justify-content-center align-items-center mb-3">
+                <a href="https://glasshouserealty.com" class="d-inline-block me-3" aria-label="GlassHouse Realty - Affiliated Broker">
+                    <img src="./assets/glasshouse-logo.png" alt="GlassHouse Realty logo — affiliated broker" class="img-fluid footerlogo" loading="lazy">
+                </a>
+                <div class="text-start">
+                    <div class="fw-bold">Affiliated Broker</div>
+                    <div class="small">GlassHouse Realty — Licensed Real Estate Brokerage</div>
+                </div>
+            </div>
+            <p class="mb-0">&copy; 2026 Wamsley Group. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lead-capture.js"></script>
+    <script>
+        // Handle referral form submission
+        document.getElementById('referralForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const referralData = {
+                referrer: {
+                    firstName: document.getElementById('referrerFirstName').value,
+                    lastName: document.getElementById('referrerLastName').value,
+                    email: document.getElementById('referrerEmail').value,
+                    phone: document.getElementById('referrerPhone').value
+                },
+                referred: {
+                    firstName: document.getElementById('referredFirstName').value,
+                    lastName: document.getElementById('referredLastName').value,
+                    email: document.getElementById('referredEmail').value,
+                    phone: document.getElementById('referredPhone').value,
+                    service: document.getElementById('referredService').value,
+                    notes: document.getElementById('referralNotes').value
+                },
+                timestamp: new Date().toISOString()
+            };
+
+            // In a real implementation, send this to a backend
+            console.log('Referral submitted:', referralData);
+            
+            // You can add API call here:
+            // fetch('/api/referrals', { method: 'POST', body: JSON.stringify(referralData) });
+
+            // Show success message
+            document.getElementById('referralSuccessMessage').style.display = 'block';
+            this.reset();
+
+            // Scroll to success message
+            document.getElementById('referralSuccessMessage').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+    </script>
+</body>
+</html>
