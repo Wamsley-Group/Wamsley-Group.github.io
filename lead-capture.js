@@ -117,7 +117,7 @@ Target URL: ${targetUrl}
 This lead was captured when the user attempted to view GlassHouse listings.`;
 
                 // Send email via mailto
-                const mailtoLink = `mailto:contact@wamsleygroup.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+                const mailtoLink = `mailto:pipoat@mail.uc.edu?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
                 
                 // Open mailto link
                 // Note: This will open the user's email client

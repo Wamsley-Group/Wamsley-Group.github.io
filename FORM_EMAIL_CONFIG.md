@@ -4,11 +4,11 @@
 All forms in this website use the `mailto:` protocol to send form submissions via email. This approach requires no backend server, external services, or paid subscriptions.
 
 ## Current Configuration
-All forms are currently configured to send emails to: `contact@wamsleygroup.com`
+All forms are currently configured to send emails to: `pipoat@mail.uc.edu`
 
 ## How to Update the Email Address
 
-If you need to change the recipient email address, search for `contact@wamsleygroup.com` in the following files and replace it with your desired email address:
+If you need to change the recipient email address, search for `pipoat@mail.uc.edu` in the following files and replace it with your desired email address:
 
 1. **index.html** - Main contact form
 2. **calculator.html** - Calculator page contact form
@@ -18,7 +18,7 @@ If you need to change the recipient email address, search for `contact@wamsleygr
 ### Example:
 Search for:
 ```javascript
-mailto:contact@wamsleygroup.com?subject=...
+mailto:pipoat@mail.uc.edu?subject=...
 ```
 
 Replace with:
