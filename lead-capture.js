@@ -51,13 +51,24 @@
     }
 
     function initLeadCapture() {
+        // Check if Bootstrap is available
+        if (typeof bootstrap === 'undefined') {
+            console.warn('Bootstrap is not loaded. Lead capture modal will not function.');
+            return;
+        }
+
         // Add modal HTML to body
         const modalContainer = document.createElement('div');
         modalContainer.innerHTML = modalHTML;
         document.body.appendChild(modalContainer);
 
         let targetUrl = '';
-        const modal = new bootstrap.Modal(document.getElementById('leadCaptureModal'));
+        const modalElement = document.getElementById('leadCaptureModal');
+        if (!modalElement) {
+            console.warn('Lead capture modal element not found.');
+            return;
+        }
+        const modal = new bootstrap.Modal(modalElement);
 
         // Check if user has already submitted lead info in this session
         function hasSubmittedLead() {

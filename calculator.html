@@ -826,7 +826,7 @@
             const propertyTax = parseFloat(document.getElementById('mortPropertyTax').value) || 0;
             const insurance = parseFloat(document.getElementById('mortInsurance').value) || 0;
 
-            const loanAmount = homePrice - downPayment;
+            const loanAmount = Math.max(0, homePrice - downPayment);
             const monthlyInterestRate = interestRate / 100 / 12;
             const numberOfPayments = loanTerm * 12;
             const monthlyTax = propertyTax / 12;
