@@ -23,12 +23,23 @@
 
 4. **Deploy!** Netlify will build and deploy automatically
 
-### Getting App Password (if MFA is enabled):
+### Getting App Password (Required for Duo 2FA):
 
-For Office 365/UC Mail accounts with Multi-Factor Authentication:
-1. Contact UC IT or check your Office 365 account settings
-2. Generate an app-specific password
-3. Use this in `EMAIL_PASS` environment variable
+For Office 365/UC Mail accounts with Duo Multi-Factor Authentication:
+
+**Important**: Duo 2FA **requires an app-specific password** for SMTP access. Your regular password will not work.
+
+**Steps to generate app password:**
+1. Log in to Office 365 at https://outlook.office.com
+2. Go to Settings → View all Outlook settings → General → Mobile devices (or Account Settings → Security → App passwords)
+3. Generate a new app password for "Mail" or "SMTP"
+4. Use this generated password in `EMAIL_PASS` environment variable
+
+**Cannot find app password settings?**
+- Contact UC IT Support and request SMTP access with app-specific password generation
+- They may need to enable this feature for your account
+
+**Security Note**: Never share passwords publicly. If exposed, change immediately.
 
 ### Alternative: Using Gmail
 

@@ -34,16 +34,32 @@ For UC Mail (mail.uc.edu), use these settings:
 2. Navigate to: Site Settings > Environment Variables
 3. Add these **required** variables:
    - `EMAIL_USER`: `pipoat@mail.uc.edu`
-   - `EMAIL_PASS`: Your UC email password or app-specific password (if MFA is enabled)
+   - `EMAIL_PASS`: App-specific password (see instructions below)
    - `EMAIL_TO`: `pipoat@mail.uc.edu`
 
 The SMTP configuration is already set to Office 365 defaults:
 - `SMTP_HOST`: `smtp.office365.com` (default, can be overridden)
 - `SMTP_PORT`: `587` (default, can be overridden)
 
-**Note**: 
-- If Multi-Factor Authentication (MFA) is enabled on your UC account, you'll need to create an app-specific password
-- You may need to contact UC IT to enable SMTP access if you encounter authentication issues
+**Important - App-Specific Password Required**: 
+- UC Mail uses Duo Multi-Factor Authentication (MFA), which **requires an app-specific password** for SMTP access
+- **Do NOT use your regular UC password** - it will not work for SMTP
+- SMTP protocols cannot handle interactive MFA prompts, so you must generate an app password
+
+**To create an app-specific password for UC Mail:**
+1. Log in to your Office 365 account at https://outlook.office.com
+2. Go to: Settings (gear icon) → View all Outlook settings → General → Mobile devices
+3. Or navigate to: Account Settings → Security → App passwords
+4. Generate a new app password for "Mail" or "SMTP"
+5. Copy the generated password and use it in the `EMAIL_PASS` environment variable
+6. **Keep this password secure** - treat it like a regular password
+
+**If you cannot find app password settings:**
+- Contact UC IT Support and request SMTP access with app-specific password generation
+- They may need to enable this feature for your account
+- Alternative: They may provide OAuth2 credentials or other authentication methods
+
+**Security Reminder**: Never share passwords publicly. Always change passwords if accidentally exposed.
 
 #### Alternative Option: Using Gmail
 
