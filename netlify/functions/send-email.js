@@ -133,8 +133,7 @@ This lead was captured when the user attempted to view GlassHouse listings.`;
     return {
       statusCode: 500,
       body: JSON.stringify({ 
-        error: 'Failed to send email',
-        details: error.message 
+        error: 'Failed to send email'
       })
     };
   }
