@@ -77,36 +77,37 @@
             <div class="container">
                 <h2>Connect with Us</h2>
                 <p>Ready to make your real estate dreams a reality? Reach out to us today!</p>
-                <form>
+                <form name="contact" method="POST" data-netlify="true" action="/success.html">
+                    <input type="hidden" name="form-name" value="contact" />
                     <div class="mb-3">
                         <label for="firstName" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="firstName" required>
+                        <input type="text" class="form-control" id="firstName" name="firstName" required>
                     </div>
                     <div class="mb-3">
                         <label for="lastName" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="lastName" required>
+                        <input type="text" class="form-control" id="lastName" name="lastName" required>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" required>
+                        <input type="email" class="form-control" id="email" name="email" required>
                     </div>
                     <div class="mb-3">
                         <label for="phone" class="form-label">Phone Number</label>
-                        <input type="tel" class="form-control" id="phone" required>
+                        <input type="tel" class="form-control" id="phone" name="phone" required>
                     </div>
                     <div class="mb-3">
                         <label for="service" class="form-label">Service Inquiry</label>
-                        <select class="form-select" id="service" required>
+                        <select class="form-select" id="service" name="service" required>
                             <option value="" disabled selected>Select a service</option>
-                            <option value="service1">Buying a Home</option>
-                            <option value="service2">Selling my Home</option>
-                            <option value="service3">Obtaining information regarding my home value</option>
-                            <option value="service4">Obtaining communication regarding market updates</option>
-                            <option value="service5">Other</option>
+                            <option value="Buying a Home">Buying a Home</option>
+                            <option value="Selling my Home">Selling my Home</option>
+                            <option value="Obtaining information regarding my home value">Obtaining information regarding my home value</option>
+                            <option value="Obtaining communication regarding market updates">Obtaining communication regarding market updates</option>
+                            <option value="Other">Other</option>
                         </select>
                     </div>
                     <div class="form-check mb-3">
-                        <input type="checkbox" class="form-check-input" id="consent" required>
+                        <input type="checkbox" class="form-check-input" id="consent" name="consent" value="yes" required>
                         <label class="form-check-label" for="consent">I consent to communication and understand that my information will not be shared or sold.</label>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>

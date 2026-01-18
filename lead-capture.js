@@ -13,21 +13,27 @@
                 </div>
                 <div class="modal-body">
                     <p class="text-muted">Please provide your contact information before viewing listings. This helps us serve you better.</p>
-                    <form id="leadCaptureForm">
+                    <form id="leadCaptureForm" name="lead-capture" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                        <input type="hidden" name="form-name" value="lead-capture" />
+                        <input type="hidden" name="source" value="GlassHouse Link Click" />
+                        <input type="hidden" name="targetUrl" id="leadTargetUrl" />
+                        <p style="display: none;">
+                            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                        </p>
                         <div class="mb-3">
                             <label for="leadName" class="form-label">Full Name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="leadName" required>
+                            <input type="text" class="form-control" id="leadName" name="name" required>
                         </div>
                         <div class="mb-3">
                             <label for="leadEmail" class="form-label">Email <span class="text-danger">*</span></label>
-                            <input type="email" class="form-control" id="leadEmail" required>
+                            <input type="email" class="form-control" id="leadEmail" name="email" required>
                         </div>
                         <div class="mb-3">
                             <label for="leadPhone" class="form-label">Phone Number <span class="text-danger">*</span></label>
-                            <input type="tel" class="form-control" id="leadPhone" required>
+                            <input type="tel" class="form-control" id="leadPhone" name="phone" required>
                         </div>
                         <div class="form-check mb-3">
-                            <input type="checkbox" class="form-check-input" id="leadConsent" required>
+                            <input type="checkbox" class="form-check-input" id="leadConsent" name="consent" value="yes" required>
                             <label class="form-check-label small" for="leadConsent">
                                 I consent to being contacted by Wamsley Group regarding real estate services.
                             </label>
@@ -86,34 +92,54 @@
             if (link && !hasSubmittedLead()) {
                 e.preventDefault();
                 targetUrl = link.href;
+                // Set the hidden target URL field
+                document.getElementById('leadTargetUrl').value = targetUrl;
                 modal.show();
             }
         });
 
-        // Handle form submission
-        document.getElementById('leadCaptureSubmit').addEventListener('click', function() {
+        // Handle form submission with AJAX
+        document.getElementById('leadCaptureSubmit').addEventListener('click', async function(e) {
+            e.preventDefault();
             const form = document.getElementById('leadCaptureForm');
             
             if (form.checkValidity()) {
-                const leadData = {
-                    name: document.getElementById('leadName').value,
-                    email: document.getElementById('leadEmail').value,
-                    phone: document.getElementById('leadPhone').value,
-                    timestamp: new Date().toISOString(),
-                    source: 'GlassHouse Link Click'
-                };
+                const submitButton = this;
+                const originalButtonText = submitButton.textContent;
+                submitButton.disabled = true;
+                submitButton.textContent = 'Sending...';
 
-                // Store lead data (in real implementation, send to backend)
-                console.log('Lead captured:', leadData);
-                
-                // You can add API call here to send data to backend
-                // fetch('/api/leads', { method: 'POST', body: JSON.stringify(leadData) });
+                try {
+                    // Submit form to Netlify via AJAX
+                    const formData = new FormData(form);
+                    
+                    const response = await fetch('/', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: new URLSearchParams(formData).toString()
+                    });
 
-                setLeadCaptured();
-                modal.hide();
-                
-                // Redirect to target URL
-                window.location.href = targetUrl;
+                    if (response.ok) {
+                        // Form submitted successfully
+                        setLeadCaptured();
+                        modal.hide();
+                        
+                        // Redirect to target URL
+                        window.location.href = targetUrl;
+                    } else {
+                        throw new Error('Failed to submit form');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    // Even if submission fails, allow user to proceed
+                    alert('Unable to submit your information, but you can still view the listings.');
+                    setLeadCaptured();
+                    modal.hide();
+                    window.location.href = targetUrl;
+                } finally {
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalButtonText;
+                }
             } else {
                 form.reportValidity();
             }
