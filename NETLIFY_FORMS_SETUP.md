@@ -112,6 +112,30 @@ For most small business websites, the free tier is sufficient.
 - Make sure `action="/success.html"` is set on forms
 - The `success.html` page must exist in your repository
 
+### Getting 405 errors on form submission
+
+If you're getting HTTP 405 (Method Not Allowed) errors when submitting forms:
+
+1. **Check netlify.toml redirect rules**: Ensure redirect rules don't intercept POST requests
+   - Redirect rules should only apply to GET requests: `conditions = {Method = ["GET"]}`
+   - Add `force = false` to allow existing routes (like form endpoints) to take precedence
+   
+2. **Current configuration** (in `netlify.toml`):
+   ```toml
+   [[redirects]]
+     from = "/*"
+     to = "/index.html"
+     status = 200
+     force = false
+     conditions = {Method = ["GET"]}
+   ```
+   This ensures that:
+   - Only GET requests are redirected for SPA routing
+   - POST requests (form submissions) pass through to Netlify Forms
+   - Forms can be processed correctly without 405 errors
+
+3. **Forms not appearing in Netlify dashboard**: After fixing 405 errors and redeploying, form submissions should appear in the Netlify Forms dashboard
+
 ## Advantages of Netlify Forms
 
 ✅ **No custom code**: No serverless functions or backend needed
