@@ -109,6 +109,20 @@ If you experience spam:
 1. Change `_captcha` value from "false" to "true" in all forms
 2. This will add reCAPTCHA v3 verification (no user interaction needed)
 
+### Advanced: Using Hash-Based Endpoints
+
+For enhanced privacy, FormSubmit supports hash-based endpoints that hide the email address:
+
+1. **After initial email verification**, FormSubmit provides a unique hash code
+2. Replace email in form actions with the hash: `https://formsubmit.co/{hash}`
+3. This prevents email harvesters from scraping your email address
+4. The hash is unique to your email and works for all forms
+
+**To get your hash:**
+- Check the verification email from FormSubmit
+- Or submit a form and FormSubmit will provide the hash in their response
+- Update all form actions to use the hash instead of the email
+
 ## Changing the Recipient Email
 
 To change the email address that receives form submissions:
@@ -213,9 +227,11 @@ After deploying:
 ## Security Notes
 
 - **HTTPS recommended** - GitHub Pages provides HTTPS automatically
-- **No sensitive data exposed** - Email address in form action is not sensitive
+- **Email address visibility** - The email address (`pipoat@mail.uc.edu`) is visible in form action attributes. This is required for FormSubmit to work. While this exposes the email to web scrapers, FormSubmit provides robust spam protection via honeypot fields and optional reCAPTCHA. The email address is also publicly visible in other parts of the website.
+- **Email obfuscation option** - FormSubmit supports hash-based endpoints after the first verification, which hides the email. To use this, after email verification, FormSubmit will provide a hash that can replace the email in form actions.
 - **Client-side validation** - All forms have HTML5 validation
-- **Spam protection** - Honeypot and optional reCAPTCHA
+- **Spam protection** - Honeypot fields (`_honey`) catch most bot submissions
+- **reCAPTCHA available** - Can be enabled by changing `_captcha` to "true" if spam becomes an issue
 
 ## Comparison with Previous Implementation
 
