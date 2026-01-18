@@ -1,8 +1,8 @@
 [build]
   publish = "."
 
+# Redirect for SPA, but not for existing files or POST requests (forms)
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-  force = false
