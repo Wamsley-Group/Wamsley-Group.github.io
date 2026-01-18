@@ -2,13 +2,13 @@
 
 ## Overview
 
-This website now uses a serverless backend to automatically send emails from form submissions without requiring users to use their email client. The implementation uses Netlify Functions with Nodemailer.
+This website now uses a serverless backend to automatically send emails from form submissions without requiring users to use their email client. The implementation uses Netlify Functions with Nodemailer configured for Office 365.
 
 ## Architecture
 
 - **Frontend**: Static HTML/CSS/JavaScript forms
 - **Backend**: Netlify serverless function (`netlify/functions/send-email.js`)
-- **Email Service**: Nodemailer (supports any SMTP server)
+- **Email Service**: Nodemailer with Office 365 SMTP
 - **Hosting**: Can be deployed on Netlify, Vercel, or similar platforms
 
 ## Setup Instructions
@@ -26,15 +26,52 @@ This website now uses a serverless backend to automatically send emails from for
 
 You need to set up environment variables for email sending:
 
-#### Option A: Using Gmail (Simplest for testing)
+#### Default Configuration: Office 365 (UC Mail)
+
+For UC Mail (mail.uc.edu), use these settings:
+
+1. Go to your Netlify site dashboard
+2. Navigate to: Site Settings > Environment Variables
+3. Add these **required** variables:
+   - `EMAIL_USER`: `pipoat@mail.uc.edu`
+   - `EMAIL_PASS`: App-specific password (see instructions below)
+   - `EMAIL_TO`: `pipoat@mail.uc.edu`
+
+The SMTP configuration is already set to Office 365 defaults:
+- `SMTP_HOST`: `smtp.office365.com` (default, can be overridden)
+- `SMTP_PORT`: `587` (default, can be overridden)
+
+**Important - App-Specific Password Required**: 
+- UC Mail uses Duo Multi-Factor Authentication (MFA), which **requires an app-specific password** for SMTP access
+- **Do NOT use your regular UC password** - it will not work for SMTP
+- SMTP protocols cannot handle interactive MFA prompts, so you must generate an app password
+
+**To create an app-specific password for UC Mail:**
+1. Log in to your Office 365 account at https://outlook.office.com
+2. Go to: Settings (gear icon) → View all Outlook settings → General → Mobile devices
+3. Or navigate to: Account Settings → Security → App passwords
+4. Generate a new app password for "Mail" or "SMTP"
+5. Copy the generated password and use it in the `EMAIL_PASS` environment variable
+6. **Keep this password secure** - treat it like a regular password
+
+**If you cannot find app password settings:**
+- Contact UC IT Support and request SMTP access with app-specific password generation
+- They may need to enable this feature for your account
+- Alternative: They may provide OAuth2 credentials or other authentication methods
+
+**Security Reminder**: Never share passwords publicly. Always change passwords if accidentally exposed.
+
+#### Alternative Option: Using Gmail
+
+If you prefer to use Gmail instead:
 
 1. Go to your Netlify site dashboard
 2. Navigate to: Site Settings > Environment Variables
 3. Add these variables:
-   - `EMAIL_USER`: Your Gmail address (e.g., `pipoat@mail.uc.edu`)
+   - `EMAIL_USER`: Your Gmail address
    - `EMAIL_PASS`: Your Gmail app password (see instructions below)
-   - `EMAIL_TO`: Recipient email (e.g., `pipoat@mail.uc.edu`)
-   - `SMTP_HOST`: `smtp.gmail.com`
+   - `EMAIL_TO`: Recipient email
+   - `SMTP_HOST`: `smtp.gmail.com` (overrides default)
    - `SMTP_PORT`: `587`
 
 **To get a Gmail App Password:**
@@ -43,18 +80,7 @@ You need to set up environment variables for email sending:
 3. Generate an app password for "Mail"
 4. Use this password (not your regular Gmail password) in `EMAIL_PASS`
 
-#### Option B: Using University Email (UC Mail)
-
-For UC Mail (mail.uc.edu), use these settings:
-- `EMAIL_USER`: `pipoat@mail.uc.edu`
-- `EMAIL_PASS`: Your UC email password or app-specific password
-- `EMAIL_TO`: `pipoat@mail.uc.edu`
-- `SMTP_HOST`: `smtp.office365.com` (if using Office 365)
-- `SMTP_PORT`: `587`
-
-**Note**: You may need to contact UC IT to enable SMTP access or get specific server details.
-
-#### Option C: Using Other Email Services
+#### Other Email Services
 
 For other SMTP providers (SendGrid, Mailgun, etc.):
 - Set `SMTP_HOST` and `SMTP_PORT` according to provider documentation
@@ -93,14 +119,19 @@ netlify dev
    - Check logs for errors
 
 2. **Verify environment variables**:
-   - Ensure all required variables are set
+   - Ensure all required variables are set (EMAIL_USER, EMAIL_PASS, EMAIL_TO)
    - Check for typos in variable names
    - Try re-deploying after setting variables
 
 3. **Test SMTP credentials**:
-   - Verify your email credentials work
+   - Verify your email credentials work by logging into webmail
    - Check if SMTP is enabled for your account
-   - Try sending a test email manually
+   - For Office 365/UC Mail, verify with IT that SMTP access is enabled
+
+4. **Office 365 specific issues**:
+   - Ensure the account has SMTP authentication enabled
+   - If using MFA, make sure you're using an app-specific password
+   - Check that the account is not blocked or restricted
 
 #### Spam folder
 
@@ -115,6 +146,7 @@ Check your spam/junk folder. Consider:
 - **HTTPS only**: Forms will only work on HTTPS (Netlify provides this automatically)
 - **Rate limiting**: Consider adding rate limiting to prevent spam (not included in basic setup)
 - **Email validation**: Server-side validation is included in the function
+- **Error handling**: Error details are logged server-side but not exposed to clients for security
 
 ## Cost
 
@@ -122,9 +154,9 @@ Check your spam/junk folder. Consider:
 - **Email Service**: Free if using your existing email SMTP
 - **Total Cost**: $0 for typical use
 
-## Alternative Email Services (if Gmail doesn't work)
+## Alternative Email Services (for production)
 
-### SendGrid (Recommended for production)
+### SendGrid (Recommended for high-volume production)
 - Free tier: 100 emails/day
 - More reliable than personal email SMTP
 - Setup: https://sendgrid.com/
@@ -134,6 +166,23 @@ Check your spam/junk folder. Consider:
 - Free tier: 5,000 emails/month for 3 months
 - Setup: https://www.mailgun.com/
 
+## Technical Details
+
+### SMTP Configuration
+
+The serverless function is configured with:
+- **Port 587** with STARTTLS (standard for Office 365)
+- **TLS cipher configuration** for Office 365 compatibility
+- **Secure authentication** using environment variables
+- **Error logging** for debugging without exposing details to clients
+
+### Supported Form Types
+
+The backend handles three types of forms:
+1. **Contact Form** - General inquiries from index.html and calculator.html
+2. **Referral Form** - Client referrals from referral.html
+3. **Lead Capture** - GlassHouse listing interest from lead-capture.js
+
 ## Migration from mailto:
 
 The forms have been updated to:
@@ -142,20 +191,18 @@ The forms have been updated to:
 3. Display success/error messages inline
 4. No longer require email client to be configured
 
-## Files Modified
+## Files Included
 
-- `index.html` - Contact form
-- `calculator.html` - Calculator contact form
-- `referral.html` - Referral form
-- `lead-capture.js` - Lead capture modal
-- `netlify.toml` - Netlify configuration (new)
-- `package.json` - Dependencies (new)
-- `netlify/functions/send-email.js` - Serverless function (new)
+- `netlify.toml` - Netlify configuration
+- `package.json` - Dependencies (nodemailer)
+- `netlify/functions/send-email.js` - Serverless function with Office 365 configuration
+- `.gitignore` - Excludes node_modules and sensitive files
 
 ## Support
 
 For issues:
 1. Check Netlify function logs
-2. Verify environment variables
-3. Test SMTP credentials manually
-4. Contact Netlify support if deployment issues persist
+2. Verify environment variables are set correctly
+3. Test SMTP credentials manually (webmail login)
+4. For UC Mail issues, contact UC IT support
+5. Contact Netlify support if deployment issues persist

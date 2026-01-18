@@ -24,7 +24,7 @@ exports.handler = async (event, context) => {
   const EMAIL_USER = process.env.EMAIL_USER || 'pipoat@mail.uc.edu';
   const EMAIL_PASS = process.env.EMAIL_PASS;
   const EMAIL_TO = process.env.EMAIL_TO || 'pipoat@mail.uc.edu';
-  const SMTP_HOST = process.env.SMTP_HOST || 'smtp.gmail.com';
+  const SMTP_HOST = process.env.SMTP_HOST || 'smtp.office365.com';
   const SMTP_PORT = process.env.SMTP_PORT || 587;
 
   // Validate required environment variables
@@ -40,10 +40,13 @@ exports.handler = async (event, context) => {
   const transporter = nodemailer.createTransport({
     host: SMTP_HOST,
     port: SMTP_PORT,
-    secure: false, // Use TLS
+    secure: false, // Use STARTTLS
     auth: {
       user: EMAIL_USER,
       pass: EMAIL_PASS
+    },
+    tls: {
+      ciphers: 'SSLv3'
     }
   });
 
@@ -130,8 +133,7 @@ This lead was captured when the user attempted to view GlassHouse listings.`;
     return {
       statusCode: 500,
       body: JSON.stringify({ 
-        error: 'Failed to send email',
-        details: error.message 
+        error: 'Failed to send email'
       })
     };
   }
