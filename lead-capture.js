@@ -13,13 +13,13 @@
                 </div>
                 <div class="modal-body">
                     <p class="text-muted">Please provide your contact information before viewing listings. This helps us serve you better.</p>
-                    <form id="leadCaptureForm" name="lead-capture" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-                        <input type="hidden" name="form-name" value="lead-capture" />
+                    <form id="leadCaptureForm" name="lead-capture" method="POST" action="https://formsubmit.co/pipoat@mail.uc.edu">
+                        <!-- FormSubmit Configuration -->
+                        <input type="hidden" name="_subject" value="New Lead Capture from Wamsley Group Website">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="text" name="_honey" style="display:none">
                         <input type="hidden" name="source" value="GlassHouse Link Click" />
                         <input type="hidden" name="targetUrl" id="leadTargetUrl" />
-                        <p style="display: none;">
-                            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
-                        </p>
                         <div class="mb-3">
                             <label for="leadName" class="form-label">Full Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="leadName" name="name" required>
@@ -110,13 +110,16 @@
                 submitButton.textContent = 'Sending...';
 
                 try {
-                    // Submit form to Netlify via AJAX
+                    // Submit form to FormSubmit via AJAX
                     const formData = new FormData(form);
                     
-                    const response = await fetch('/', {
+                    const response = await fetch('https://formsubmit.co/ajax/pipoat@mail.uc.edu', {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                        body: new URLSearchParams(formData).toString()
+                        headers: { 
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(Object.fromEntries(formData))
                     });
 
                     if (response.ok) {
