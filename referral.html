@@ -95,8 +95,12 @@
                         <div class="card shadow-sm">
                             <div class="card-body p-4">
                                 <h2 class="card-title mb-4">Submit a Referral</h2>
-                                <form name="referral" method="POST" data-netlify="true" action="/success.html">
-                                    <input type="hidden" name="form-name" value="referral" />
+                                <form name="referral" method="POST" action="https://formsubmit.co/pipoat@mail.uc.edu">
+                                    <!-- FormSubmit Configuration -->
+                                    <input type="hidden" name="_subject" value="New Referral Submission from Wamsley Group Website">
+                                    <input type="hidden" name="_next" value="https://wamsleygroup.com/success.html">
+                                    <input type="hidden" name="_captcha" value="false">
+                                    <input type="text" name="_honey" style="display:none">
                                     <!-- Referrer Information -->
                                     <div class="mb-4">
                                         <h5 class="mb-3 text-primary">Your Information (Referrer)</h5>
