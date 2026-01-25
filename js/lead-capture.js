@@ -1,8 +1,17 @@
-// Lead Capture Modal for External Links
+/**
+ * Lead Capture Modal for External Links
+ * 
+ * Intercepts clicks to external listing sites (GlassHouse) and captures
+ * user contact information before redirecting. Prevents repeated prompts
+ * using sessionStorage. Submits data to FormSubmit.co via AJAX.
+ */
 (function() {
     'use strict';
 
-    // Create modal HTML
+    /**
+     * Modal HTML template
+     * Uses Bootstrap 5 modal component with FormSubmit configuration
+     */
     const modalHTML = `
     <div class="modal fade" id="leadCaptureModal" tabindex="-1" aria-labelledby="leadCaptureModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered">
@@ -49,13 +58,19 @@
     </div>
     `;
 
-    // Add modal to page when DOM is ready
+    /**
+     * Initialize lead capture when DOM is ready
+     */
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initLeadCapture);
     } else {
         initLeadCapture();
     }
 
+    /**
+     * Main initialization function
+     * Sets up modal, event listeners, and form handling
+     */
     function initLeadCapture() {
         // Check if Bootstrap is available
         if (typeof bootstrap === 'undefined') {
@@ -68,6 +83,7 @@
         modalContainer.innerHTML = modalHTML;
         document.body.appendChild(modalContainer);
 
+        // Initialize variables
         let targetUrl = '';
         const modalElement = document.getElementById('leadCaptureModal');
         if (!modalElement) {
@@ -76,16 +92,25 @@
         }
         const modal = new bootstrap.Modal(modalElement);
 
-        // Check if user has already submitted lead info in this session
+        /**
+         * Check if user has already submitted lead info in this session
+         * @returns {boolean} True if lead was captured this session
+         */
         function hasSubmittedLead() {
             return sessionStorage.getItem('leadCaptured') === 'true';
         }
 
+        /**
+         * Mark lead as captured for this session
+         */
         function setLeadCaptured() {
             sessionStorage.setItem('leadCaptured', 'true');
         }
 
-        // Intercept clicks on GlassHouse links
+        /**
+         * Intercept clicks on GlassHouse links
+         * Shows modal if user hasn't submitted lead info yet
+         */
         document.addEventListener('click', function(e) {
             const link = e.target.closest('a[href*="glasshouserealty.com"]');
             
@@ -98,11 +123,15 @@
             }
         });
 
-        // Handle form submission with AJAX
+        /**
+         * Handle form submission with AJAX
+         * Submits to FormSubmit, then redirects user to target URL
+         */
         document.getElementById('leadCaptureSubmit').addEventListener('click', async function(e) {
             e.preventDefault();
             const form = document.getElementById('leadCaptureForm');
             
+            // Validate form before submission
             if (form.checkValidity()) {
                 const submitButton = this;
                 const originalButtonText = submitButton.textContent;
@@ -133,7 +162,7 @@
                         throw new Error('Failed to submit form');
                     }
                 } catch (error) {
-                    console.error('Error:', error);
+                    console.error('Error submitting lead capture form:', error);
                     // Even if submission fails, allow user to proceed
                     alert('Unable to submit your information, but you can still view the listings.');
                     setLeadCaptured();
@@ -148,7 +177,9 @@
             }
         });
 
-        // Reset form when modal is closed without submission
+        /**
+         * Reset form when modal is closed without submission
+         */
         document.getElementById('leadCaptureModal').addEventListener('hidden.bs.modal', function() {
             if (!hasSubmittedLead()) {
                 document.getElementById('leadCaptureForm').reset();
