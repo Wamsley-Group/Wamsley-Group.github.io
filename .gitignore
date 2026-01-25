@@ -1,6 +1,35 @@
+# Dependencies
 node_modules/
+
+# Build outputs
 .netlify/
+dist/
+build/
+
+# Logs
 npm-debug.log
+*.log
+
+# Environment files
 .env
 .env.local
+.env.*.local
+
+# Package lock files (optional - some prefer to commit these)
 package-lock.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+tmp/
+temp/
+*.tmp
