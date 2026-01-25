@@ -13,7 +13,7 @@
                 </div>
                 <div class="modal-body">
                     <p class="text-muted">Please provide your contact information before viewing listings. This helps us serve you better.</p>
-                    <form id="leadCaptureForm" name="lead-capture" method="POST" action="https://formsubmit.co/pipoat@mail.uc.edu">
+                    <form id="leadCaptureForm" name="lead-capture" method="POST" action="https://formsubmit.co/0c6f7ab0d6232efd90a3c784fe5be90e">
                         <!-- FormSubmit Configuration -->
                         <input type="hidden" name="_subject" value="New Lead Capture from Wamsley Group Website">
                         <input type="hidden" name="_captcha" value="false">
@@ -113,7 +113,7 @@
                     // Submit form to FormSubmit via AJAX
                     const formData = new FormData(form);
                     
-                    const response = await fetch('https://formsubmit.co/ajax/pipoat@mail.uc.edu', {
+                    const response = await fetch('https://formsubmit.co/ajax/0c6f7ab0d6232efd90a3c784fe5be90e', {
                         method: 'POST',
                         headers: { 
                             'Content-Type': 'application/json',
