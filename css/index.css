@@ -4,6 +4,20 @@
  */
 
 /* ========================================
+   CSS CUSTOM PROPERTIES
+   ======================================== */
+:root {
+    --color-dark-bg: #212529;
+    --color-dark-bg-alt: #2d3238;
+    --color-dark-bg-light: #1a1d20;
+    --color-primary: #0d6efd;
+    --color-success: #28a745;
+    --color-success-light: #20c997;
+    --gradient-success: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    --gradient-primary: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%);
+}
+
+/* ========================================
    LAYOUT & STRUCTURE
    ======================================== */
 
@@ -13,7 +27,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     margin: 0;
-    background-color: #212529;
+    background-color: var(--color-dark-bg);
 }
 
 main {
@@ -65,6 +79,7 @@ video {
 .homepagewelcome h1 {
     font-weight: 700;
     line-height: 1.2;
+    color: white; /* Fallback for accessibility */
 }
 
 .homepagewelcome .lead {
@@ -83,7 +98,7 @@ video {
 }
 
 .homepagewelcome .btn-success {
-    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    background: var(--gradient-success);
     border: none;
 }
 
@@ -143,7 +158,7 @@ video {
     right: 30px;
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    background: var(--gradient-success);
     color: white;
     border-radius: 50%;
     display: flex;
@@ -189,7 +204,7 @@ video {
 
 /* Trust Section */
 .trust-section {
-    background: linear-gradient(135deg, #1a1d20 0%, #2d3238 100%);
+    background: linear-gradient(135deg, var(--color-dark-bg-light) 0%, var(--color-dark-bg-alt) 100%);
     color: white;
 }
 
@@ -233,20 +248,21 @@ video {
 
 /* Contact section */
 .contact-class {
-    background-color: #212529;
+    background-color: var(--color-dark-bg);
     color: white;
 }
 
 /* Contact Card Styling */
 .contact-card {
-    background: linear-gradient(135deg, #1a1d20 0%, #2d3238 100%);
+    background: linear-gradient(135deg, var(--color-dark-bg-light) 0%, var(--color-dark-bg-alt) 100%);
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .contact-card h2 {
     font-size: 2.5rem;
     font-weight: 700;
-    background: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%);
+    color: var(--color-primary); /* Fallback color for accessibility */
+    background: var(--gradient-primary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -268,12 +284,12 @@ video {
 }
 
 .quick-contact-options .btn-success {
-    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    background: var(--gradient-success);
     border: none;
 }
 
 .quick-contact-options .btn-info {
-    background: linear-gradient(135deg, #0dcaf0 0%, #0d6efd 100%);
+    background: var(--gradient-primary);
     border: none;
 }
 
@@ -281,7 +297,7 @@ video {
 .or-divider {
     display: inline-block;
     padding: 0 20px;
-    background: #212529;
+    background: var(--color-dark-bg);
     position: relative;
     color: rgba(255, 255, 255, 0.6);
     font-weight: 600;
@@ -334,7 +350,7 @@ video {
 }
 
 .contact-card .form-select option {
-    background: #2d3238;
+    background: var(--color-dark-bg-alt);
     color: white;
 }
 
