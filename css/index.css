@@ -187,6 +187,50 @@ video {
    CARDS & CONTENT
    ======================================== */
 
+/* Trust Section */
+.trust-section {
+    background: linear-gradient(135deg, #1a1d20 0%, #2d3238 100%);
+    color: white;
+}
+
+.trust-section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+}
+
+.trust-section .lead {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.trust-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.trust-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.trust-icon {
+    color: #0d6efd;
+}
+
+.trust-card h4 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.trust-card p {
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+}
+
 /* Contact section */
 .contact-class {
     background-color: #212529;
