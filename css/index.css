@@ -4,6 +4,20 @@
  */
 
 /* ========================================
+   CSS CUSTOM PROPERTIES
+   ======================================== */
+:root {
+    --color-dark-bg: #212529;
+    --color-dark-bg-alt: #2d3238;
+    --color-dark-bg-light: #1a1d20;
+    --color-primary: #0d6efd;
+    --color-success: #28a745;
+    --color-success-light: #20c997;
+    --gradient-success: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    --gradient-primary: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%);
+}
+
+/* ========================================
    LAYOUT & STRUCTURE
    ======================================== */
 
@@ -13,7 +27,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     margin: 0;
-    background-color: #212529;
+    background-color: var(--color-dark-bg);
 }
 
 main {
@@ -51,13 +65,53 @@ video {
 
 /* Welcome card styling */
 .welcome {
-    background-color: #212529;
+    background: linear-gradient(135deg, rgba(33, 37, 41, 0.95) 0%, rgba(45, 50, 56, 0.95) 100%);
     color: white;
-    border-radius: 100px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
 }
 
 .homepagewelcome {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.homepagewelcome h1 {
+    font-weight: 700;
+    line-height: 1.2;
+    color: white; /* Fallback for accessibility */
+}
+
+.homepagewelcome .lead {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.homepagewelcome .btn {
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.homepagewelcome .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.homepagewelcome .btn-success {
+    background: var(--gradient-success);
+    border: none;
+}
+
+/* Responsive button layout */
+@media (max-width: 768px) {
+    .homepagewelcome .d-grid {
+        gap: 0.75rem !important;
+    }
+    
+    .homepagewelcome .btn-lg {
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+    }
 }
 
 /* ========================================
@@ -86,13 +140,217 @@ video {
     background-color: white;
 }
 
+/* Call to Action Button in Navigation */
+.btn-call {
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.btn-call:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(13, 110, 253, 0.3);
+}
+
+/* Floating Action Button */
+.floating-call-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: var(--gradient-success);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    animation: pulse 2s infinite;
+}
+
+.floating-call-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.6);
+    color: white;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+    }
+    50% {
+        box-shadow: 0 4px 25px rgba(40, 167, 69, 0.7);
+    }
+}
+
+/* Mobile responsiveness for floating button */
+@media (max-width: 768px) {
+    .floating-call-btn {
+        width: 55px;
+        height: 55px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 22px;
+    }
+}
+
 /* ========================================
    CARDS & CONTENT
    ======================================== */
 
+/* Trust Section */
+.trust-section {
+    background: linear-gradient(135deg, var(--color-dark-bg-light) 0%, var(--color-dark-bg-alt) 100%);
+    color: white;
+}
+
+.trust-section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+}
+
+.trust-section .lead {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.trust-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.trust-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.trust-icon {
+    color: #0d6efd;
+}
+
+.trust-card h4 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.trust-card p {
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+}
+
 /* Contact section */
 .contact-class {
-    background-color: #212529;
+    background-color: var(--color-dark-bg);
+    color: white;
+}
+
+/* Contact Card Styling */
+.contact-card {
+    background: linear-gradient(135deg, var(--color-dark-bg-light) 0%, var(--color-dark-bg-alt) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact-card h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-primary); /* Fallback color for accessibility */
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.contact-card .lead {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Quick Contact Options */
+.quick-contact-options .btn {
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.quick-contact-options .btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.quick-contact-options .btn-success {
+    background: var(--gradient-success);
+    border: none;
+}
+
+.quick-contact-options .btn-info {
+    background: var(--gradient-primary);
+    border: none;
+}
+
+/* OR Divider */
+.or-divider {
+    display: inline-block;
+    padding: 0 20px;
+    background: var(--color-dark-bg);
+    position: relative;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+}
+
+.or-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -100px;
+    width: 100px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.or-divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -100px;
+    width: 100px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Form Styling */
+.contact-card .form-control,
+.contact-card .form-select {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.contact-card .form-control:focus,
+.contact-card .form-select:focus {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #0d6efd;
+    color: white;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.contact-card .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.contact-card .form-label {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.contact-card .form-select option {
+    background: var(--color-dark-bg-alt);
     color: white;
 }
 
