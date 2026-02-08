@@ -201,6 +201,13 @@
         let isOpen = false;
         
         mainBtn.addEventListener('click', function() {
+            // Track interactions if GTM is available (before state change)
+            if (window.trackGTMEvent) {
+                window.trackGTMEvent('floating_contact_click', {
+                    'action': isOpen ? 'close' : 'open'
+                });
+            }
+            
             isOpen = !isOpen;
             
             if (isOpen) {
@@ -227,14 +234,8 @@
             }
         });
         
-        // Track interactions if GTM is available
+        // Track contact option clicks if GTM is available
         if (window.trackGTMEvent) {
-            mainBtn.addEventListener('click', function() {
-                window.trackGTMEvent('floating_contact_click', {
-                    'action': isOpen ? 'close' : 'open'
-                });
-            });
-            
             document.querySelectorAll('.floating-contact-option').forEach(option => {
                 option.addEventListener('click', function() {
                     const type = this.classList.contains('phone-option') ? 'phone' :
